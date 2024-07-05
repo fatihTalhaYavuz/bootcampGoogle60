@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Group 600 Project'),
+      home: const MyHomePage(title: 'Group 600 Project, we use figma'),
     );
   }
 }
