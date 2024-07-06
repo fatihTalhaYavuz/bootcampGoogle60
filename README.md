@@ -1,16 +1,55 @@
-# google_bootcamp_60
+# Takım İsmi
+# Flutter Grup 60
 
-A new Flutter project.
+## Takım Üyeleri
+# İnci Temizel - Scrum Master - Developer
+# Fatih Talha Yavuzoğlu - Product Owner - Developer
+# İpek Gültekin - Developer
+# Ferat Taş - Developer
 
-## Getting Started
+## Ürün İsmi
+# AllGötür
 
-This project is a starting point for a Flutter application.
+[## Product Backlog URL]
+(https://trello.com/b/SitcivfB/bootcamp-grup-60)
 
-A few resources to get you started if this is your first Flutter project:
+## Ürün Açıklaması
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Ürün Özellikleri
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Hedef Kitle
+
+###SPRINT 1
+
+Sprint içinde tamamlanması tahmin edilen puan: 25
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 113 puanlık backlog bulunmaktadır. 
+İlk sprint için 25 puan hedefinde bulunulmuş ve hedefe ulaşılmıştır. İkinci sprint için 54, üçüncü sprint için 34 puanlık hedefler oluşturulmuştur.
+
+Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına karar verilmiştir. Ayrıca haftada en az iki kere google meet üzerinden toplantı yapılmıştır.
+
+Sprint Notları:
+- Sprint sorunsuz ilerlemiştir.
+- Tasarım için Figma kullanılmasına karar verilmiştir
+- Backlog takibi için Trello kullanımına karar verilmiştir
+- Giriş yapma yönteminin mail ile sağlanmasına karar verilmiştir
+  
+
+Sprint board screenshot:
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/e36605dd-8c4a-4aff-83f2-eccff0115dc6)
+
+
+Ürün Durumu:
+
+
+Sprint Review:
+- Veritabanı olarak Firebase kullanılmasına karar verilmiştir
+- Uygulamanın sayfa tasarımları detaylı olarak oluşturulmuştur.
+- Genel olarak sorunsuz bir sprint süreci geçirildi.
+
+Sprint Retrospective:
+- İkinci sprint başlangıcı ile beraber temel tasarımlarla beraber firebase bağlantılarının ve database planlamasının oluşturulmasına karar verilmiştir.
+- Takım içi rol dağılımı yapılmıştır.
+
+
+
