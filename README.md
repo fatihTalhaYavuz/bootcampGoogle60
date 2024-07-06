@@ -1,25 +1,25 @@
 # Takım İsmi
-# Flutter Grup 60
+## Flutter Grup 60
 
-## Takım Üyeleri
-# İnci Temizel - Scrum Master - Developer
-# Fatih Talha Yavuzoğlu - Product Owner - Developer
-# İpek Gültekin - Developer
-# Ferat Taş - Developer
+# Takım Üyeleri
+###### İnci Temizel - Scrum Master - Developer
+###### Fatih Talha Yavuzoğlu - Product Owner - Developer
+###### İpek Gültekin - Developer
+###### Ferat Taş - Developer
 
-## Ürün İsmi
-# AllGötür
+# Ürün İsmi
+## AllGötür
 
-[## Product Backlog URL]
+# Product Backlog URL
 (https://trello.com/b/SitcivfB/bootcamp-grup-60)
 
-## Ürün Açıklaması
+# Ürün Açıklaması
 
-## Ürün Özellikleri
+# Ürün Özellikleri
 
-## Hedef Kitle
+# Hedef Kitle
 
-###SPRINT 1
+## SPRINT 1
 
 Sprint içinde tamamlanması tahmin edilen puan: 25
 
@@ -51,5 +51,7 @@ Sprint Retrospective:
 - İkinci sprint başlangıcı ile beraber temel tasarımlarla beraber firebase bağlantılarının ve database planlamasının oluşturulmasına karar verilmiştir.
 - Takım içi rol dağılımı yapılmıştır.
 
+Daily scrum toplantı not örnekleri:
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/b8a5df35-61a7-45e4-96b9-91e0a380a401)
 
 
