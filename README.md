@@ -19,7 +19,7 @@
 
 # Hedef Kitle
 
-## SPRINT 1
+# SPRINT 1
 
 Sprint içinde tamamlanması tahmin edilen puan: 131
 
