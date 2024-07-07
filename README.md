@@ -21,10 +21,10 @@
 
 ## SPRINT 1
 
-Sprint içinde tamamlanması tahmin edilen puan: 25
+Sprint içinde tamamlanması tahmin edilen puan: 131
 
-Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 113 puanlık backlog bulunmaktadır. 
-İlk sprint için 25 puan hedefinde bulunulmuş ve hedefe ulaşılmıştır. İkinci sprint için 54, üçüncü sprint için 34 puanlık hedefler oluşturulmuştur.
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 573 puanlık backlog bulunmaktadır.
+İlk sprint için 131 puan hedefinde bulunulmuş ve hedefe ulaşılmıştır. İkinci sprint için 221, üçüncü sprint için 221 puanlık hedefler oluşturulmuştur.
 
 Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına karar verilmiştir. Ayrıca haftada en az iki kere google meet üzerinden toplantı yapılmıştır.
 
@@ -33,13 +33,14 @@ Sprint Notları:
 - Tasarım için Figma kullanılmasına karar verilmiştir
 - Backlog takibi için Trello kullanımına karar verilmiştir
 - Giriş yapma yönteminin mail ile sağlanmasına karar verilmiştir
-  
 
 Sprint board screenshot:
 ![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/e36605dd-8c4a-4aff-83f2-eccff0115dc6)
 
-
 Ürün Durumu:
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/2766135e-5835-4012-9f90-e1a29e9ff73c)
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/a74d7e44-cdda-4392-a025-d181248284a4)
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/81fdf800-1e4e-4f84-93cb-dddb16d1778d)
 
 
 Sprint Review:
