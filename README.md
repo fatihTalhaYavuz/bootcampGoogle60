@@ -23,8 +23,8 @@ Restoranların ellerindeki yemek stoğuna göre yemek bağışında bulunabilmel
 Kullanıcıların konumlarına yakın yerlerden rezervasyon yaparak ücretsiz olarak ulaşabilmeleri.
 
 # Hedef Kitle
-Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
-Sürdürülebilir bir yaşam için açlığa son vermeye katkıda bulunmak isteyen restoranlar.
+- Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
+- Sürdürülebilir bir yaşam için açlığa son vermeye katkıda bulunmak isteyen restoranlar.
 
 # SPRINT 1
 
