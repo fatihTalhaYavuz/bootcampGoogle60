@@ -1,5 +1,5 @@
 # Takım İsmi
-## Flutter Grup 60
+###### Flutter Grup 60
 
 # Takım Üyeleri
 ###### İnci Temizel - Scrum Master - Developer
@@ -8,7 +8,7 @@
 ###### Ferat Taş - Developer
 
 # Ürün İsmi
-## AllGötür
+###### AllGötür
 
 # Product Backlog URL
 (https://trello.com/b/SitcivfB/bootcamp-grup-60)
