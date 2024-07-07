@@ -53,6 +53,6 @@ Sprint Retrospective:
 - Takım içi rol dağılımı yapılmıştır.
 
 Daily scrum toplantı not örnekleri:
+![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/9ed35926-faea-4081-8f6b-222e55ee696b)
 ![image](https://github.com/fatihTalhaYavuz/bootcampGoogle60/assets/55516422/b8a5df35-61a7-45e4-96b9-91e0a380a401)
-
 
