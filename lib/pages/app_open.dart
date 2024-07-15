@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class UygAcilis extends StatefulWidget {
-  const UygAcilis({super.key});
+class app_open extends StatefulWidget {
+  const app_open({super.key});
 
   @override
-  State<UygAcilis> createState() => _UygAcilisState();
+  State<app_open> createState() => _app_openState();
 }
 
-class _UygAcilisState extends State<UygAcilis> {
+class _app_openState extends State<app_open> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
