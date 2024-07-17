@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_bootcamp_60/pages/app_open.dart';
+import 'package:google_bootcamp_60/pages/app_open_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.red,
       ),
-      home: const app_open(),
+      home: const app_open_screen(),
     );
   }
 }
