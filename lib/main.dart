@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_bootcamp_60/pages/app_open_screen.dart';
+import 'package:google_bootcamp_60/app_open_screen.dart';
 
 void main() {
   runApp(const MyApp());
