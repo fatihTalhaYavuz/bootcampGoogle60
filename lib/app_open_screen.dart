@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'pages/loginscreen/user_login_screen.dart';
+import 'pages/loginscreen/restaurant_login_screen.dart';
 
-class app_open_screen extends StatefulWidget {
-  const app_open_screen({super.key});
+class AppOpenScreen extends StatefulWidget {
+  const AppOpenScreen({super.key});
 
   @override
-  State<app_open_screen> createState() => _app_open_screenState();
+  State<AppOpenScreen> createState() => _AppOpenScreenState();
 }
 
-class _app_open_screenState extends State<app_open_screen> {
+class _AppOpenScreenState extends State<AppOpenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,24 +52,24 @@ class _app_open_screenState extends State<app_open_screen> {
                   height: 100.0,
                   width: 100.0,
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 // Hoş geldin mesajı
-                Text(
+                const Text(
                   'All Götür\'e Hoş Geldin!',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Text(
+                const SizedBox(height: 10.0),
+                const Text(
                   'Restoranların israfını engellemek amacıyla\nsen de uygun saati yakala, bedava yemeğini kap!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16.0,
                   ),
                 ),
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 // Butonlar
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -75,17 +77,27 @@ class _app_open_screenState extends State<app_open_screen> {
                     // Kullanıcı girişi butonu
                     ElevatedButton(
                       onPressed: () {
-                        // Kullanıcı girişi işlemi
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const UserLoginScreen(),
+                          ),
+                        );
                       },
-                      child: Text('Kullanıcı girişi'),
+                      child: const Text('Kullanıcı girişi'),
                     ),
-                    SizedBox(width: 20.0),
+                    const SizedBox(width: 20.0),
                     // Restoran girişi butonu
                     ElevatedButton(
                       onPressed: () {
-                        // Restoran girişi işlemi
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RestaurantLoginScreen(),
+                          ),
+                        );
                       },
-                      child: Text('Restoran girişi'),
+                      child: const Text('Restoran girişi'),
                     ),
                   ],
                 ),
