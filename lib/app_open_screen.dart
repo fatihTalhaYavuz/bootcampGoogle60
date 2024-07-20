@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/colors.dart';
 import 'pages/loginscreen/user_login_screen.dart';
 import 'pages/loginscreen/restaurant_login_screen.dart';
 
@@ -84,7 +85,13 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                           ),
                         );
                       },
-                      child: const Text('Kullanıcı girişi'),
+                      child: const Text(
+                        'Kullanıcı girişi',
+                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: buttonrenkana, // Buton arka plan rengini sarı yapar
+                      ),
                     ),
                     const SizedBox(width: 20.0),
                     // Restoran girişi butonu
@@ -97,7 +104,13 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                           ),
                         );
                       },
-                      child: const Text('Restoran girişi'),
+                      child: const Text(
+                        'Restoran girişi',
+                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: buttonrenkana, // Buton arka plan rengini turuncu yapar
+                      ),
                     ),
                   ],
                 ),
