@@ -72,16 +72,16 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 547 puan
 
 Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına karar verilmiştir. 
 
-Sprint Notları:
-- Sprint sorunsuz ilerlemiştir.
-- Tasarım için Figmada belirlenen tasarımlar fluttera dökülmüştür.
-- Giriş sayfalarında firebase bağlantıları yapılmıştır.
+Ürün Durumu:
+![image](https://github.com/user-attachments/assets/1c9e0127-1985-41cd-a639-066f082491ae)
 
 Sprint board screenshot:
 ![image](https://github.com/user-attachments/assets/c3727765-62c5-4283-a316-a8dcf1f6d52a)
 
-Ürün Durumu:
-![image](https://github.com/user-attachments/assets/1c9e0127-1985-41cd-a639-066f082491ae)
+Sprint Notları:
+- Sprint sorunsuz ilerlemiştir.
+- Tasarım için Figmada belirlenen tasarımlar fluttera dökülmüştür.
+- Giriş sayfalarında firebase bağlantıları yapılmıştır.
 
 Sprint Review:
 - Genel olarak sorunsuz bir sprint süreci geçirildi.
