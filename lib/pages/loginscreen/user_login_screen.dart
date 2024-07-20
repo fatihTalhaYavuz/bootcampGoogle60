@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/pwreset.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/register.dart';
 
 class UserLoginScreen extends StatelessWidget {
   const UserLoginScreen({super.key});
@@ -12,7 +14,7 @@ class UserLoginScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black), // AppBar simge rengi
       ),
       body: Stack(
         children: [
@@ -62,7 +64,7 @@ class UserLoginScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Colors.black, // 'Kullanıcı girişi' yazı rengi
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -70,11 +72,17 @@ class UserLoginScreen extends StatelessWidget {
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'E-mail',
+                        hintStyle: TextStyle(
+                          color: Colors.black, // 'E-mail' ipucu yazı rengi
+                        ),
                         filled: true,
-                        fillColor: lgnback,
+                        fillColor: lgnback, // TextField arka plan rengi
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                      ),
+                      style: TextStyle(
+                        color: Colors.black, // Girilen e-posta yazı rengi
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -82,13 +90,19 @@ class UserLoginScreen extends StatelessWidget {
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'Şifre',
+                        hintStyle: TextStyle(
+                          color: Colors.black, // 'Şifre' ipucu yazı rengi
+                        ),
                         filled: true,
-                        fillColor: lgnback,
+                        fillColor: lgnback, // TextField arka plan rengi
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
                       obscureText: true,
+                      style: TextStyle(
+                        color: Colors.black, // Girilen şifre yazı rengi
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     Row(
@@ -96,15 +110,35 @@ class UserLoginScreen extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            // Şifremi unuttum işlemi
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PwResetScreen(),
+                              ),
+                            );
                           },
-                          child: const Text('Şifremi Unuttum!'),
+                          child: const Text(
+                            'Şifremi Unuttum!',
+                            style: TextStyle(
+                              color: Colors.black, // 'Şifremi Unuttum!' yazı rengi
+                            ),
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
-                            // Kayıt ol işlemi
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterScreen(),
+                              ),
+                            );
                           },
-                          child: const Text('Kayıt Ol!'),
+                          child: const Text(
+                            'Kayıt Ol!',
+                            style: TextStyle(
+                              color: Colors.black, // 'Kayıt Ol!' yazı rengi
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -113,7 +147,12 @@ class UserLoginScreen extends StatelessWidget {
                       onPressed: () {
                         // Giriş yap işlemi
                       },
-                      child: const Text('Giriş Yap!'),
+                      child: const Text(
+                        'Giriş Yap!',
+                        style: TextStyle(
+                          color: Colors.white, // Buton yazı rengi
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
                         padding: const EdgeInsets.symmetric(
