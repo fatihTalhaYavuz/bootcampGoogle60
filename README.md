@@ -66,6 +66,7 @@ Daily scrum toplantı not örnekleri:
 # SPRINT 2
 
 Sprint içinde tamamlanması tahmin edilen puan: 200
+
 Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 547 puanlık backlog bulunmaktadır.
 İkinci sprint için 200 puan hedefinde bulunulmuş ve hedefe ulaşılmıştır. Totalde ilk sprint artı ikinci sprintte 335 puan tamamlanmıştır. 
 Üçüncü sprint için 216 puanlık hedef oluşturulmuştur.
