@@ -6,4 +6,4 @@ var lgnbttns = const Color(0xFFC8C4B7); // Giriş yapmadan önceki buton (Giriş
 var buttonrenk2 = const Color(0xFFF7B500);
 var buttonrenkana = const Color(0xFFEAEFFF);
 var anayazirenk = const Color(0xFF12162D);
-var anarenk3 = const Color(0xFF596552);
+var anarenk3 = const Color(0xFFFF0000);
