@@ -54,9 +54,9 @@ class UserLoginScreen extends StatelessWidget {
                   children: [
                     // Logo
                     Image.asset(
-                      'assets/logo.png', // Logo dosyasının yolu
-                      height: 100.0,
-                      width: 100.0,
+                      'assets/logoallgotur.png', // Logo dosyasının yolu
+                      height: 150.0,
+                      fit: BoxFit.fitHeight,
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
