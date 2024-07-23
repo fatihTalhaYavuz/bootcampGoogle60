@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/pwreset.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/register.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/respwreset.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/resregister.dart'; // Kayıt ekranı dosyasını import ettik
 
-class UserLoginScreen extends StatelessWidget {
-  const UserLoginScreen({super.key});
+class RestaurantLoginScreen extends StatelessWidget {
+  const RestaurantLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, // Klavye açıldığında yeniden boyutlandırmayı engeller
-      extendBodyBehindAppBar: true, // AppBar'ın arka plana yayılmasını sağlar
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black), // AppBar simge rengi
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Stack(
         children: [
-          // Üst yeşil daire
           Positioned(
             top: -150,
             right: -150,
@@ -31,7 +30,6 @@ class UserLoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Alt yeşil daire
           Positioned(
             bottom: -180,
             left: -150,
@@ -44,7 +42,6 @@ class UserLoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          // İçerik
           Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -52,57 +49,44 @@ class UserLoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Logo
                     Image.asset(
-                      'assets/logo.png', // Logo dosyasının yolu
+                      'assets/logo.png',
                       height: 100.0,
                       width: 100.0,
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
-                      'Kullanıcı girişi',
+                      'Restoran girişi',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black, // 'Kullanıcı girişi' yazı rengi
+                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // E-mail TextField
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'E-mail',
-                        hintStyle: TextStyle(
-                          color: Colors.black, // 'E-mail' ipucu yazı rengi
-                        ),
                         filled: true,
-                        fillColor: lgnback, // TextField arka plan rengi
+                        fillColor: lgnback,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                      ),
-                      style: TextStyle(
-                        color: Colors.black, // Girilen e-posta yazı rengi
+                        hintStyle: const TextStyle(color: Colors.black),
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // Şifre TextField
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'Şifre',
-                        hintStyle: TextStyle(
-                          color: Colors.black, // 'Şifre' ipucu yazı rengi
-                        ),
                         filled: true,
-                        fillColor: lgnback, // TextField arka plan rengi
+                        fillColor: lgnback,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        hintStyle: const TextStyle(color: Colors.black),
                       ),
                       obscureText: true,
-                      style: TextStyle(
-                        color: Colors.black, // Girilen şifre yazı rengi
-                      ),
                     ),
                     const SizedBox(height: 20.0),
                     Row(
@@ -113,15 +97,13 @@ class UserLoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const PwResetScreen(),
+                                builder: (context) => const ResPwResScreen(),
                               ),
                             );
                           },
                           child: const Text(
-                            'Şifremi Unuttum!',
-                            style: TextStyle(
-                              color: Colors.black, // 'Şifremi Unuttum!' yazı rengi
-                            ),
+                            'Şifresmi Unuttum!',
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                         TextButton(
@@ -129,34 +111,30 @@ class UserLoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const RegisterScreen(),
+                                builder: (context) => const ResRegScreen(), // Kayıt ekranı yönlendirmesi
                               ),
                             );
                           },
                           child: const Text(
-                            'Kayıt Ol!',
-                            style: TextStyle(
-                              color: Colors.black, // 'Kayıt Ol!' yazı rengi
-                            ),
+                            'Kayıt OL!',
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 2.0),
+                    const SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: () {
                         // Giriş yap işlemi
                       },
                       child: const Text(
                         'Giriş Yap!',
-                        style: TextStyle(
-                          color: Colors.white, // Buton yazı rengi
-                        ),
+                        style: TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
+                        backgroundColor: lgnbttns.withOpacity(0.72),
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 125.0,
+                          horizontal: 80.0,
                           vertical: 20.0,
                         ),
                         shape: RoundedRectangleBorder(

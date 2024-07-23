@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'pages/loginscreen/user_login_screen.dart';
-import 'pages/loginscreen/restaurant_login_screen.dart';
+import 'pages/loginscreen/user/user_login_screen.dart';
+import 'pages/loginscreen/restaurant/restaurant_login_screen.dart';
 
 class AppOpenScreen extends StatefulWidget {
   const AppOpenScreen({super.key});
