@@ -47,20 +47,33 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo
+                // Eski logo
                 Image.asset(
-                  'assets/logo.png', // Logo dosyasının yolu
-                  height: 100.0,
-                  width: 100.0,
+                  'assets/logoallgotur.png', // Eski logo dosyasının yolu
+                  height: 150.0,
+                  fit: BoxFit.fitHeight,
                 ),
                 const SizedBox(height: 20.0),
-                // Hoş geldin mesajı
-                const Text(
-                  'All Götür\'e Hoş Geldin!',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                // Yeni logo ve hoş geldiniz mesajı
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Yeni logo
+                    Image.asset(
+                      'assets/allgotur.png', // Yeni logo dosyasının yolu
+                      height: 50.0,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    const SizedBox(width: 10.0), // Logo ile metin arasında boşluk bırakır
+                    // Hoş geldin mesajı
+                    const Text(
+                      'Hoş Geldiniz!',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10.0),
                 const Text(
@@ -87,10 +100,10 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                       },
                       child: const Text(
                         'Kullanıcı girişi',
-                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                        style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonrenkana, // Buton arka plan rengini sarı yapar
+                        backgroundColor: buttonrenkana,
                       ),
                     ),
                     const SizedBox(width: 20.0),
@@ -106,10 +119,10 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                       },
                       child: const Text(
                         'Restoran girişi',
-                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                        style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonrenkana, // Buton arka plan rengini turuncu yapar
+                        backgroundColor: buttonrenkana,
                       ),
                     ),
                   ],

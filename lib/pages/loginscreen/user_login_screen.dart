@@ -60,7 +60,7 @@ class UserLoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
-                      'Kullanıcı girişi',
+                      'Kullanıcı Girişi',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
