@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user_login_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
-
-  @override
-  _RegisterScreenState createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  bool isChecked = true; // Checkbox'un başlangıç durumu
+class ResRegScreen extends StatelessWidget {
+  const ResRegScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
-                      'Kayıt OL!',
+                      'Kayıt Ol',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
@@ -74,10 +66,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // Ad Soyad TextField
+                    // Kullanıcı Adı TextField
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Ad Soyad',
+                        hintText: 'Kullanıcı Adı',
                         filled: true,
                         fillColor: lgnback,
                         border: OutlineInputBorder(
@@ -87,23 +79,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // Telefon Numarası TextField
+                    // E-mail TextField
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Telefon Numarası',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Mail TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Mail',
+                        hintText: 'E-mail',
                         filled: true,
                         fillColor: lgnback,
                         border: OutlineInputBorder(
@@ -127,28 +106,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
-                    // Kullanım ve Gizlilik Şartları
-                    CheckboxListTile(
-                      title: const Text(
-                        'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                    // Şifre Onayı TextField
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Şifre Onayı',
+                        filled: true,
+                        fillColor: lgnback,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
                       ),
-                      value: isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
-                      checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
-                      activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
+                      obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: () {
-                        // Kayıt ol işlemi
+                        // Kayıt işlemi yapılacak yer
                       },
                       child: const Text(
-                        'Kayıt OL!',
+                        'Kayıt Ol!',
                         style: TextStyle(color: Colors.white), // Buton içindeki yazıyı beyaz yapar
                       ),
                       style: ElevatedButton.styleFrom(
@@ -160,21 +137,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const UserLoginScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Hesabım VAR!',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
                       ),
                     ),
                   ],

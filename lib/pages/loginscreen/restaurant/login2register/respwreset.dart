@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/pwreset.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/register.dart';
 
-class UserLoginScreen extends StatelessWidget {
-  const UserLoginScreen({super.key});
+class ResPwResScreen extends StatelessWidget {
+  const ResPwResScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +58,11 @@ class UserLoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
-                      'Kullanıcı girişi',
+                      'Restoran Şifreni Sıfırla!',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black, // 'Kullanıcı girişi' yazı rengi
+                        color: Colors.black, // Başlık yazı rengi
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -73,7 +71,7 @@ class UserLoginScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'E-mail',
                         hintStyle: TextStyle(
-                          color: Colors.black, // 'E-mail' ipucu yazı rengi
+                          color: Colors.black, // İpucu yazı rengi
                         ),
                         filled: true,
                         fillColor: lgnback, // TextField arka plan rengi
@@ -82,81 +80,25 @@ class UserLoginScreen extends StatelessWidget {
                         ),
                       ),
                       style: TextStyle(
-                        color: Colors.black, // Girilen e-posta yazı rengi
+                        color: Colors.black, // Girilen yazı rengi
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // Şifre TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Şifre',
-                        hintStyle: TextStyle(
-                          color: Colors.black, // 'Şifre' ipucu yazı rengi
-                        ),
-                        filled: true,
-                        fillColor: lgnback, // TextField arka plan rengi
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      obscureText: true,
-                      style: TextStyle(
-                        color: Colors.black, // Girilen şifre yazı rengi
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PwResetScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Şifremi Unuttum!',
-                            style: TextStyle(
-                              color: Colors.black, // 'Şifremi Unuttum!' yazı rengi
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const RegisterScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Kayıt Ol!',
-                            style: TextStyle(
-                              color: Colors.black, // 'Kayıt Ol!' yazı rengi
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2.0),
+                    // Şifre Sıfırla Butonu
                     ElevatedButton(
                       onPressed: () {
-                        // Giriş yap işlemi
+                        // Şifre sıfırlama işlemi
                       },
                       child: const Text(
-                        'Giriş Yap!',
+                        'ŞİFRENİ SIFIRLA',
                         style: TextStyle(
                           color: Colors.white, // Buton yazı rengi
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
+                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengi
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 125.0,
+                          horizontal: 75.0,
                           vertical: 20.0,
                         ),
                         shape: RoundedRectangleBorder(
