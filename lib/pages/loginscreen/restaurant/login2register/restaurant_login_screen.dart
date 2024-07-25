@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/restaurant/respwreset.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/restaurant/resregister.dart'; // Kayıt ekranı dosyasını import ettik
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/respwreset.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/resregister.dart'; // Kayıt ekranı dosyasını import ettik
 
 class RestaurantLoginScreen extends StatelessWidget {
   const RestaurantLoginScreen({super.key});

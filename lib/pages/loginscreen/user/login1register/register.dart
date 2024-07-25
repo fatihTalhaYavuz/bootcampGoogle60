@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/user_login_screen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

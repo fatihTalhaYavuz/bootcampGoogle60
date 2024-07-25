@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/pwreset.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/register.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/pwreset.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/register.dart';
 
 class UserLoginScreen extends StatelessWidget {
   const UserLoginScreen({super.key});

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'pages/loginscreen/user/user_login_screen.dart';
-import 'pages/loginscreen/restaurant/restaurant_login_screen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userhomescreen.dart';
+import 'pages/loginscreen/user/login1register/user_login_screen.dart';
+import 'pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
 
 class AppOpenScreen extends StatefulWidget {
   const AppOpenScreen({super.key});
@@ -113,6 +115,40 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                       ),
                     ),
                   ],
+                ),
+              ],
+            ),
+          ),
+          // Sağ alttaki iki buton
+          Positioned(
+            bottom: 30,
+            right: 30,
+            child: Column(
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserHomeScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.person),
+                  heroTag: 'userHomeScreen',
+                ),
+                const SizedBox(height: 10),
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResHomeScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.restaurant),
+                  heroTag: 'resHomeScreen',
                 ),
               ],
             ),
