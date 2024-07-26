@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
 
-class ResRegScreen extends StatelessWidget {
+class ResRegScreen extends StatefulWidget {
   const ResRegScreen({super.key});
+
+  @override
+  _ResRegScreenState createState() => _ResRegScreenState();
+}
+
+class _ResRegScreenState extends State<ResRegScreen> {
+  bool isChecked = false; // Checkbox'un başlangıç durumu
 
   @override
   Widget build(BuildContext context) {
@@ -120,16 +128,41 @@ class ResRegScreen extends StatelessWidget {
                       obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Kayıt işlemi yapılacak yer
+                    // Kullanım ve Gizlilik Şartları
+                    CheckboxListTile(
+                      title: GestureDetector(
+                        onTap: () {
+                          // Kullanıcıyı KVKK metnine yönlendirecek işlem
+                        },
+                        child: const Text(
+                          'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
+                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar.//
+                        ),
+                      ),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
                       },
+                      checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
+                      activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
+                    ),
+                    const SizedBox(height: 20.0),
+                    ElevatedButton(
+                      onPressed: isChecked
+                          ? () {
+                              // Kayıt işlemi yapılacak yer
+                            }
+                          : null, // Checkbox işaretlenmeden buton tıklanamaz
                       child: const Text(
                         'Kayıt Ol!',
                         style: TextStyle(color: Colors.white), // Buton içindeki yazıyı beyaz yapar
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
+                        backgroundColor: isChecked
+                            ? lgnbttns.withOpacity(0.72) // Buton arka plan rengini yüzde 72 şeffaf yapar
+                            : Colors.grey, // Checkbox işaretlenmediyse gri yapar
                         padding: const EdgeInsets.symmetric(
                           horizontal: 80.0,
                           vertical: 20.0,
@@ -137,6 +170,21 @@ class ResRegScreen extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RestaurantLoginScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Hesabım VAR!',
+                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
                       ),
                     ),
                   ],
