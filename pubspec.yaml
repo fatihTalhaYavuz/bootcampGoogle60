@@ -66,6 +66,14 @@ flutter:
     - assets/grill.png
     - assets/sepet.png
     - assets/reshome.png
+    - assets/banner2.png
+    - assets/banner3.png
+    - assets/zerogoal.png
+    - assets/plus.png
+    - assets/home.png
+    - assets/profile.png
+    - assets/shopping.png
+    - assets/allgit.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
