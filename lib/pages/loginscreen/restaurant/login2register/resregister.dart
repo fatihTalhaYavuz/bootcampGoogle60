@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 
 class ResRegScreen extends StatefulWidget {
   const ResRegScreen({super.key});
@@ -137,7 +136,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                         },
                         child: const Text(
                           'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
-                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar.//
                         ),
                       ),
                       value: isChecked,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreservescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart'; // Import UserProfileScreen
 
