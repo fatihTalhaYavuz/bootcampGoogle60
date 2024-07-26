@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
@@ -8,7 +11,9 @@ class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
-
+late String  email, password;
+final formkey=GlobalKey<FormState>();
+final firebaseAuth= FirebaseAuth.instance;
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isChecked = true; // Checkbox'un başlangıç durumu
 
@@ -55,129 +60,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Logo
-                    Image.asset(
-                      'assets/logo.png', // Logo dosyasının yolu
-                      height: 100.0,
-                      width: 100.0,
-                    ),
-                    const SizedBox(height: 20.0),
-                    const Text(
-                      'Kayıt OL!',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black, // Başlık yazısını siyah yapar
+                child: Form(
+                  key: formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Logo
+                      Image.asset(
+                        'assets/logo.png', // Logo dosyasının yolu
+                        height: 100.0,
+                        width: 100.0,
                       ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Ad Soyad TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Ad Soyad',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Telefon Numarası TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Telefon Numarası',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Mail TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Mail',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Şifre TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Şifre',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                      obscureText: true, // Şifre alanını gizli yapar
-                    ),
-                    const SizedBox(height: 20.0),
-                    // Kullanım ve Gizlilik Şartları
-                    CheckboxListTile(
-                      title: const Text(
-                        'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
-                      ),
-                      value: isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
-                      checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
-                      activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
-                    ),
-                    const SizedBox(height: 20.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Kayıt ol işlemi
-                      },
-                      child: const Text(
+                      const SizedBox(height: 20.0),
+                      const Text(
                         'Kayıt OL!',
-                        style: TextStyle(color: Colors.white), // Buton içindeki yazıyı beyaz yapar
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 80.0,
-                          vertical: 20.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black, // Başlık yazısını siyah yapar
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const UserLoginScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Hesabım VAR!',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                      const SizedBox(height: 20.0),
+
+                      usernameTextField(), // isim soyisim metodu
+                      const SizedBox(height: 20.0),
+
+                      mobileNumberTextField(), //tel no metodu
+                      const SizedBox(height: 20.0),
+
+                      emailTextField(), //e-mail metodu
+                      const SizedBox(height: 20.0),
+
+                      passwordTextField(),//şifre metodu
+                      const SizedBox(height: 20.0),
+
+                      CheckboxListTile(
+                        title: const Text(
+                          'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
+                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                        ),
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        },
+                        checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
+                        activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20.0),
+
+                      registerButton(context),
+
+                      const SizedBox(height: 20.0),
+
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const UserLoginScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Hesabım VAR!',
+                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -186,4 +138,102 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+}
+
+TextFormField usernameTextField(){
+  return TextFormField(
+    decoration: customInputDecoration("Ad Soyad"),
+
+  );
+}
+TextFormField mobileNumberTextField(){
+  return TextFormField(
+    decoration: customInputDecoration("Telefon Numarası"),
+
+  );
+}TextFormField emailTextField(){
+  return TextFormField(
+    validator: (value){
+      if(value!.isEmpty){
+        return "Bilgileri Eksiksiz Doldurunuz.";
+      }else {
+
+      }
+    },
+    onSaved: (value){
+      email=value!;
+
+    },
+    decoration: customInputDecoration("E-mail"),
+
+  );
+}TextFormField passwordTextField(){
+  return TextFormField(
+    validator: (value){
+      if(value!.isEmpty){
+        return "Bilgileri Eksiksiz Doldurunuz.";
+      }else {
+
+      }
+    },
+    onSaved: (value){
+      password=value!;
+
+    },
+    decoration: customInputDecoration("Şifre"),
+    obscureText: true,
+
+  );
+}
+InputDecoration customInputDecoration(String hintText) {
+  return InputDecoration(
+      hintText: hintText,
+      filled: true,
+      fillColor: lgnback,
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20.0),
+  ),
+  hintStyle: const TextStyle(color: Colors.black),
+  );// Placeholder yazısını siyah yapar)
+
+}
+Center registerButton(BuildContext context){
+  return Center(
+    child:TextButton(
+      onPressed: () async {
+        if(formkey.currentState!.validate()){ //firebase için tıkladığında veriyi alıp gönderm
+
+          formkey.currentState!.save();
+          try{
+            var userResult=await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+            formkey.currentState!.reset();
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Kayıt başarılı, lütfen giriş sayfasına gidin.")),
+            );
+          } catch (e) {
+            print(e.toString());
+
+          }catch(e){
+            print(e.toString());
+          }
+        } else{}
+        // Kayıt ol işlemi
+      },
+      child: const Text(
+        'Kayıt OL!',
+        style: TextStyle(color: Colors.white), // Buton içindeki yazıyı beyaz yapar
+      ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
+        padding: const EdgeInsets.symmetric(
+          horizontal: 80.0,
+          vertical: 20.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
+    ),
+  );
 }
