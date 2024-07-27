@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class UserReserve extends StatefulWidget {
-  const UserReserve({super.key});
+class RestReserve extends StatefulWidget {
+  const RestReserve({super.key});
 
   @override
-  _UserReserveState createState() => _UserReserveState();
+  _RestReserveState createState() => _RestReserveState();
 }
 
-class _UserReserveState extends State<UserReserve> {
+class _RestReserveState extends State<RestReserve> {
   bool showCart = true; // Initial state shows the cart
   String selectedLocation = 'Kadıköy'; // Default selection
   final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli'];
@@ -17,7 +17,7 @@ class _UserReserveState extends State<UserReserve> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
+        toolbarHeight: 80.0, // AppBar height (reduced)
         backgroundColor: Colors.transparent, // Transparent background
         elevation: 0, // No shadow
         leading: IconButton(
@@ -30,7 +30,7 @@ class _UserReserveState extends State<UserReserve> {
           alignment: Alignment(0.0, 0), // Centered
           child: Image.asset(
             'assets/reshome.png',
-            height: 130.0, // Logo size
+            height: 100.0, // Reduced logo size
           ),
         ),
         actions: [
@@ -38,8 +38,8 @@ class _UserReserveState extends State<UserReserve> {
             padding: const EdgeInsets.only(right: 16.0),
             child: Image.asset(
               'assets/sepet.png',
-              height: 50.0,
-              width: 50.0,
+              height: 40.0,
+              width: 40.0,
             ),
           ),
         ],
@@ -127,7 +127,7 @@ class _UserReserveState extends State<UserReserve> {
                             });
                           },
                           child: Text(
-                            'SEPETİM',
+                            'BAĞIŞLARIM',
                             style: TextStyle(
                               fontSize: 18.0,
                               color: showCart ? Colors.black : Colors.black38,
@@ -142,7 +142,7 @@ class _UserReserveState extends State<UserReserve> {
                             });
                           },
                           child: Text(
-                            'REZERVLERİM',
+                            'REZERVLER',
                             style: TextStyle(
                               fontSize: 18.0,
                               color: !showCart ? Colors.black : Colors.black38,
@@ -160,25 +160,14 @@ class _UserReserveState extends State<UserReserve> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomPaint(
-              painter: HalfCirclePainter(),
-              child: Container(
-                height: 100, // Butonun yüksekliğini artırdık
-                width: double.infinity,
-                child: Center(
-                  child: TextButton(
-                    onPressed: () {
-                      // Confirm reservation
-                    },
-                    child: Text(
-                      'REZERVASYONU ONAYLA',
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                // Add new item
+              },
+              child: Icon(Icons.add),
             ),
           ),
         ],
@@ -199,41 +188,31 @@ class _UserReserveState extends State<UserReserve> {
           ),
           child: Row(
             children: [
-              Image.asset('assets/taking_food.png', width: 50.0, height: 50.0),
+              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
               SizedBox(width: 10.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Edit item
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
                 ],
-              ),
-              Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.2), // Hafif yeşil arka plan
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.remove, color: Colors.green), // Decrease icon
-                  onPressed: () {
-                    // Reduce item count
-                  },
-                  iconSize: 24.0, // İkon boyutu
-                ),
-              ),
-              Text('1', style: TextStyle(fontSize: 18.0)),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.2), // Hafif yeşil arka plan
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.add, color: Colors.green), // Increase icon
-                  onPressed: () {
-                    // Increase item count
-                  },
-                  iconSize: 24.0, // İkon boyutu
-                ),
               ),
             ],
           ),
@@ -255,16 +234,32 @@ class _UserReserveState extends State<UserReserve> {
           ),
           child: Row(
             children: [
-              Image.asset('assets/taking_food.png', width: 50.0, height: 50.0),
+              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
               SizedBox(width: 10.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Edit item
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
                 ],
               ),
-              Spacer(),
-              Text('1', style: TextStyle(fontSize: 18.0)),
             ],
           ),
         ),

@@ -106,11 +106,104 @@ class ResAddScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Removed the banner and product list
-          Column(
-            children: [
-              SizedBox(height: kToolbarHeight + 65), // Space after AppBar
-            ],
+          // Form and content
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: kToolbarHeight + 30), // Space after AppBar
+                  Center(
+                    child: Image.asset(
+                      'assets/bagis.png',
+                      height: 80.0,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    'Bağış Oluştur',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'İlan Başlığı',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  DropdownButtonFormField<String>(
+                    value: 'Sandviç',
+                    items: <String>['Sandviç', 'Çorba', 'Tatlı']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      // Handle change
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Yemek Türü',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Yemek Miktarı',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Yemek Zamanı',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Tahmini Porsiyon Adet',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Açıklama',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle image upload
+                    },
+                    child: Text('Görsel Ekle'),
+                  ),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle form submission
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      textStyle: TextStyle(fontSize: 18.0),
+                    ),
+                    child: Text('YÜKLE'),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

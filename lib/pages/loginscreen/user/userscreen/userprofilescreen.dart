@@ -130,7 +130,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 0.0), // Increased padding to move further down
+              padding: const EdgeInsets.only(bottom: 10.0), // Adjusted padding
               child: FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
@@ -142,7 +142,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 },
                 backgroundColor: Colors.transparent, // Transparent background
                 elevation: 0, // No shadow
-                child: Image.asset('assets/shopping.png', width: 130.0, height: 130.0), // Increased size of the add button
+                child: SizedBox.shrink(), // Empty button
               ),
             ),
           ),
@@ -151,13 +151,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Transparent background
+        color: Color.fromARGB(255, 255, 255, 255), // Background color
         elevation: 0, // No shadow
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/home.png',
+                  width: 80.0, height: 80.0), // Adjusted size
               onPressed: () {
                 Navigator.push(
                   context,
@@ -167,9 +168,25 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 );
               },
             ),
-            SizedBox(width: 90.0), // Space for the floating action button
+            SizedBox(width: 40.0), // Space between home and profile
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UserReserve(),
+                  ),
+                );
+              },
+              backgroundColor: Colors.transparent, // Transparent background
+              elevation: 0, // No shadow
+              child: Image.asset('assets/shopping.png',
+                  width: 100.0, height: 100.0), // Adjusted size
+            ),
+            SizedBox(width: 40.0), // Space between profile and floating button
             IconButton(
-              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/profile.png',
+                  width: 80.0, height: 80.0), // Adjusted size
               onPressed: () {
                 Navigator.push(
                   context,

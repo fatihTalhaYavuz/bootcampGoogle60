@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/restreserves.dart';
 
 class ResHomeScreen extends StatelessWidget {
   const ResHomeScreen({super.key});
@@ -74,8 +75,13 @@ class ResHomeScreen extends StatelessWidget {
               height: 50.0, // Increased cart icon height
             ),
             onPressed: () {
-              // Cart button function
-            },
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RestReserve(),
+            ),
+          );
+        },
           ),
         ],
       ),
