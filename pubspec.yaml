@@ -65,7 +65,7 @@ flutter:
     - assets/bonfire.png
     - assets/grill.png
     - assets/sepet.png
-    - assets/reshome.png
+    - assets/allgotur.png
     - assets/banner2.png
     - assets/banner3.png
     - assets/zerogoal.png
@@ -74,6 +74,8 @@ flutter:
     - assets/profile.png
     - assets/shopping.png
     - assets/allgit.png
+    - assets/add.png
+    - assets/remove.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

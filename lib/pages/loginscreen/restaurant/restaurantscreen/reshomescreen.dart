@@ -11,11 +11,58 @@ class ResHomeScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 100.0, // AppBar height
-        title: Center(
-          child: Image.asset(
-            'assets/reshome.png',
-            height: 130.0, // Logo size
-          ),
+        title: Row(
+          children: [
+            // Location selection section
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0), // Add space between logo and location selection
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'İstanbul',
+                        style: TextStyle(
+                          fontSize: 14.0, // Smaller font size
+                          color: Colors.green,
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        value: 'Kadıköy', // Default value
+                        icon: Icon(Icons.arrow_drop_down, color: Colors.green),
+                        onChanged: (String? newValue) {
+                          // Handle the location change
+                        },
+                        items: <String>['Kadıköy', 'Beşiktaş', 'Şişli']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // Logo section
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft, // Resmi sola hizalar
+                child: Container(
+                  margin: const EdgeInsets.only(right: 60.0), // Resmi sola kaydırmak için margin ekleyin
+                  child: Image.asset(
+                    'assets/reshome.png',
+                    height: 120.0, // Resmin boyutunu ayarlayın
+                    width: 120.0, // Genişlik ayarı
+                    fit: BoxFit.contain, // Resmin orantılı şekilde görünmesini sağlar
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         backgroundColor: Colors.transparent, // Transparent background
         elevation: 0, // No shadow
@@ -146,13 +193,13 @@ class ResHomeScreen extends StatelessWidget {
             IconButton(
               icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Increased size
               onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ResProfile(),
-                          ),
-                        );
-                      },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResProfile(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -160,13 +207,13 @@ class ResHomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ResAddScreen(),
-                      ),
-                    );
-                },
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ResAddScreen(),
+            ),
+          );
+        },
         backgroundColor: Colors.transparent, // Transparent background
         elevation: 0, // No shadow
         child: Image.asset('assets/plus.png', width: 130.0, height: 130.0), // Increased size of the add button
