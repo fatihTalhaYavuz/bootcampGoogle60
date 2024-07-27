@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_bootcamp_60/colors.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
 
 class ResRegScreen extends StatefulWidget {
@@ -10,7 +13,16 @@ class ResRegScreen extends StatefulWidget {
 }
 
 class _ResRegScreenState extends State<ResRegScreen> {
-  bool isChecked = false; // Checkbox'un başlangıç durumu
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
+  bool isChecked = true; // Checkbox'un başlangıç durumu
+  String selectedDistrict = ''; // Seçilen ilçe
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +78,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
-                      'Kayıt Ol',
+                      'Kayıt OL!',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
@@ -74,10 +86,11 @@ class _ResRegScreenState extends State<ResRegScreen> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // Kullanıcı Adı TextField
+                    // Ad Soyad TextField
                     TextField(
+                      controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: 'Kullanıcı Adı',
+                        hintText: 'Ad Soyad',
                         filled: true,
                         fillColor: lgnback,
                         border: OutlineInputBorder(
@@ -87,10 +100,25 @@ class _ResRegScreenState extends State<ResRegScreen> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    // E-mail TextField
+                    // Telefon Numarası TextField
                     TextField(
+                      controller: _phoneController,
                       decoration: InputDecoration(
-                        hintText: 'E-mail',
+                        hintText: 'Telefon Numarası',
+                        filled: true,
+                        fillColor: lgnback,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    // Mail TextField
+                    TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        hintText: 'Mail',
                         filled: true,
                         fillColor: lgnback,
                         border: OutlineInputBorder(
@@ -102,6 +130,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                     const SizedBox(height: 20.0),
                     // Şifre TextField
                     TextField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: 'Şifre',
                         filled: true,
@@ -114,30 +143,11 @@ class _ResRegScreenState extends State<ResRegScreen> {
                       obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
-                    // Şifre Onayı TextField
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Şifre Onayı',
-                        filled: true,
-                        fillColor: lgnback,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintStyle: const TextStyle(color: Colors.black), // Placeholder yazısını siyah yapar
-                      ),
-                      obscureText: true, // Şifre alanını gizli yapar
-                    ),
-                    const SizedBox(height: 20.0),
                     // Kullanım ve Gizlilik Şartları
                     CheckboxListTile(
-                      title: GestureDetector(
-                        onTap: () {
-                          // Kullanıcıyı KVKK metnine yönlendirecek işlem
-                        },
-                        child: const Text(
-                          'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
-                          style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar.//
-                        ),
+                      title: const Text(
+                        'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
+                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
                       ),
                       value: isChecked,
                       onChanged: (bool? value) {
@@ -149,42 +159,88 @@ class _ResRegScreenState extends State<ResRegScreen> {
                       activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
                     ),
                     const SizedBox(height: 20.0),
+                    // İlçe Dropdown
+                    DropdownButton<String>(
+                      value: selectedDistrict.isEmpty ? null : selectedDistrict,
+                      hint: const Text('İlçe seçiniz'),
+                      items: <String>[
+                        'Adalar',
+                        'Arnavutköy',
+                        'Ataşehir',
+                        // Diğer ilçeleri ekleyin
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedDistrict = newValue!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20.0),
                     ElevatedButton(
-                      onPressed: isChecked
-                          ? () {
-                              // Kayıt işlemi yapılacak yer
-                            }
-                          : null, // Checkbox işaretlenmeden buton tıklanamaz
+                      onPressed: () async {
+                        // Kayıt ol işlemi
+                        if (_nameController.text.isEmpty ||
+                            _phoneController.text.isEmpty ||
+                            _emailController.text.isEmpty ||
+                            _passwordController.text.isEmpty ||
+                            !isChecked ||
+                            selectedDistrict.isEmpty) {
+                          // Validate the input
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Lütfen tüm alanları doldurun ve şartları kabul edin.')),
+                          );
+                          return;
+                        }
+
+                        try {
+                          // Create user with email and password
+                          UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+
+
+
+
+                          await _firestore.collection('restaurants').doc(selectedDistrict).collection('details').doc(userCredential.user!.uid).set({
+                            'name': _nameController.text,
+                            'phone': _phoneController.text,
+                            'email': _emailController.text,
+                            'district': selectedDistrict,
+                            'role': 'restaurant',
+                          });
+
+                          // Navigate to login screen
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RestaurantLoginScreen(),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Kayıt sırasında bir hata oluştu: $e')),
+                          );
+                        }
+                      },
                       child: const Text(
-                        'Kayıt Ol!',
+                        'Kayıt OL!',
                         style: TextStyle(color: Colors.white), // Buton içindeki yazıyı beyaz yapar
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isChecked
-                            ? lgnbttns.withOpacity(0.72) // Buton arka plan rengini yüzde 72 şeffaf yapar
-                            : Colors.grey, // Checkbox işaretlenmediyse gri yapar
+                        backgroundColor: lgnbttns.withOpacity(0.72), // Buton arka plan rengini yüzde 72 şeffaf yapar
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 80.0,
-                          vertical: 20.0,
+                          horizontal: 50.0,
+                          vertical: 15.0,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RestaurantLoginScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Hesabım VAR!',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
                       ),
                     ),
                   ],
