@@ -19,11 +19,11 @@ Bu uygulama, restoranları ihtiyaç sahipleriyle buluşturarak yemek israfını 
 Restoranların gün sonundaki yemek stoklarına göre yaptıkları bağışların ihtiyaç sahiplerine ulaşmasını hedeflenmektedir.
 
 # Ürün Özellikleri
-Yemek Bağışı: Restoranlar, gün sonundaki yemek stoklarına göre AllGötür üzerinden yemek bağışında bulunabilirler.
+-Yemek Bağışı: Restoranlar, gün sonundaki yemek stoklarına göre AllGötür üzerinden yemek bağışında bulunabilirler.
 
-Rezervasyon İmkanı: Şu anda yalnızca İstanbul’da yaşayan kullanıcılar, kendilerine en yakın restoranlardan rezervasyon yaparak ücretsiz olarak bağışlanan yemeklere ulaşabilirler.
+-Rezervasyon İmkanı: Şu anda yalnızca İstanbul’da yaşayan kullanıcılar, kendilerine en yakın restoranlardan rezervasyon yaparak ücretsiz olarak bağışlanan yemeklere ulaşabilirler.
 
-Kolay Erişim: İhtiyaç sahipleri, uygulama üzerinden kolayca restoranları ve mevcut yemekleri görüntüleyebilir ve rezervasyon yapabilirler.
+-Kolay Erişim: İhtiyaç sahipleri, uygulama üzerinden kolayca restoranları ve mevcut yemekleri görüntüleyebilir ve rezervasyon yapabilirler.
 
 # Hedef Kitle
 - Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
