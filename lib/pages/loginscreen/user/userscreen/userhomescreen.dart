@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product2.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreservescreen.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart'; // Import UserProfileScreen
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});
@@ -74,7 +77,12 @@ class UserHomeScreen extends StatelessWidget {
               height: 50.0, // Increased cart icon height
             ),
             onPressed: () {
-              // Cart button function
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UserReserve(), // Update with appropriate screen
+                ),
+              );
             },
           ),
         ],
@@ -137,10 +145,14 @@ class UserHomeScreen extends StatelessWidget {
                       'Şirket Yemek Belirtmedi',
                       '22.00-22.30',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      Colors.green.withOpacity(0.2), // Updated color
                       () {
-                        // Define the action when the card is tapped
-                        print('Taking Food tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product(), // Navigate to TakingFoodScreen
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
@@ -150,10 +162,14 @@ class UserHomeScreen extends StatelessWidget {
                       'Domates Çorbası',
                       '23.00-23.30',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      Colors.green.withOpacity(0.2), // Updated color
                       () {
-                        // Define the action when the card is tapped
-                        print('Bonfire tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product2(), // Navigate to BonfireScreen
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
@@ -163,10 +179,14 @@ class UserHomeScreen extends StatelessWidget {
                       'Şirket Çeşit Belirtmedi',
                       '23.45-23.59',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      Colors.green.withOpacity(0.2), // Updated color
                       () {
-                        // Define the action when the card is tapped
-                        print('Grill tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product3(), // Navigate to GrillScreen
+                          ),
+                        );
                       },
                     ),
                     // Add other products here

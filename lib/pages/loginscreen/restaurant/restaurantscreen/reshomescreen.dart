@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/restreserves.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product2.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
+
 
 class ResHomeScreen extends StatelessWidget {
   const ResHomeScreen({super.key});
@@ -79,9 +83,9 @@ class ResHomeScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const RestReserve(),
-            ),
-          );
-        },
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -143,8 +147,12 @@ class ResHomeScreen extends StatelessWidget {
                       Colors.green,
                       Color(0xFFFFCDD2), // Ana yazı rengi
                       () {
-                        // Define the action when the card is tapped
-                        print('Taking Food tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product(), // Navigate to TakingFoodScreen
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
@@ -156,8 +164,12 @@ class ResHomeScreen extends StatelessWidget {
                       Colors.green,
                       Color(0xFFFFCDD2), // Ana yazı rengi
                       () {
-                        // Define the action when the card is tapped
-                        print('Bonfire tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product2(), // Navigate to BonfireScreen
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
@@ -169,8 +181,12 @@ class ResHomeScreen extends StatelessWidget {
                       Colors.green,
                       Color(0xFFFFCDD2), // Ana yazı rengi
                       () {
-                        // Define the action when the card is tapped
-                        print('Grill tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product3(), // Navigate to GrillScreen
+                          ),
+                        );
                       },
                     ),
                     // Add other products here
@@ -192,7 +208,12 @@ class ResHomeScreen extends StatelessWidget {
             IconButton(
               icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Increased size
               onPressed: () {
-                // Home button function
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResHomeScreen(),
+                  ),
+                );
               },
             ),
             SizedBox(width: 90.0), // Space for the floating action button

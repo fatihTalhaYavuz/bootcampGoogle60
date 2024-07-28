@@ -11,6 +11,7 @@ class _UserReserveState extends State<UserReserve> {
   bool showCart = true; // Initial state shows the cart
   String selectedLocation = 'Kadıköy'; // Default selection
   final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli'];
+  int itemCount = 1; // Initial item count
 
   @override
   Widget build(BuildContext context) {
@@ -216,12 +217,16 @@ class _UserReserveState extends State<UserReserve> {
                 child: IconButton(
                   icon: Icon(Icons.remove, color: Colors.green), // Decrease icon
                   onPressed: () {
-                    // Reduce item count
+                    setState(() {
+                      if (itemCount > 0) {
+                        itemCount--;
+                      }
+                    });
                   },
                   iconSize: 24.0, // İkon boyutu
                 ),
               ),
-              Text('1', style: TextStyle(fontSize: 18.0)),
+              Text('$itemCount', style: TextStyle(fontSize: 18.0)),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.2), // Hafif yeşil arka plan
@@ -230,7 +235,9 @@ class _UserReserveState extends State<UserReserve> {
                 child: IconButton(
                   icon: Icon(Icons.add, color: Colors.green), // Increase icon
                   onPressed: () {
-                    // Increase item count
+                    setState(() {
+                      itemCount++;
+                    });
                   },
                   iconSize: 24.0, // İkon boyutu
                 ),

@@ -183,6 +183,20 @@ class ResAddScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Adres',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Harita Link',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
                   ElevatedButton(
                     onPressed: () {
                       // Handle image upload
