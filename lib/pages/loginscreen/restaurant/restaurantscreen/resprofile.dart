@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/app_open_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
 class ResProfile extends StatefulWidget {
   const ResProfile({super.key});
@@ -12,15 +15,60 @@ class ResProfile extends StatefulWidget {
 
 class _ResProfileState extends State<ResProfile> {
   bool isEditing = false;
-  final TextEditingController emailController =
-      TextEditingController(text: 'taking.food@gmail.com');
-  final TextEditingController nameController =
-      TextEditingController(text: 'TAKING FOOD');
-  final TextEditingController phoneController =
-      TextEditingController(text: '0 850 505 55 00');
-  final TextEditingController addressController =
-      TextEditingController(text: 'Kadıköy');
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+
+      DocumentSnapshot? detailsDoc = await _getRestaurantDetails(uid);
+
+      if (detailsDoc != null && detailsDoc.exists) {
+        setState(() {
+          emailController.text = detailsDoc['email'];
+          nameController.text = detailsDoc['name'];
+          phoneController.text = detailsDoc['phone'];
+          addressController.text = detailsDoc['district'];
+        });
+      }
+    }
+  }
+
+  Future<DocumentSnapshot?> _getRestaurantDetails(String uid) async {
+    for (String district in Districts.istanbulDistricts) {
+      DocumentSnapshot doc = await _firestore
+          .collection('restaurants')
+          .doc(district)
+          .collection('details')
+          .doc(uid)
+          .get();
+
+      if (doc.exists) {
+        return doc;
+      }
+    }
+    return null;
+  }
+  Future<void> _signOut() async {
+    await _auth.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AppOpenScreen()),
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

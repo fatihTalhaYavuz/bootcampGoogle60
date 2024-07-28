@@ -3,6 +3,7 @@ import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -143,6 +144,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
+                    // İlçe Dropdown
+                    DropdownButton<String>(
+                      value: selectedDistrict.isEmpty ? null : selectedDistrict,
+                      hint: const Text('İlçe seçiniz'),
+                      items: Districts.istanbulDistricts.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedDistrict = newValue!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20.0),
                     // Kullanım ve Gizlilik Şartları
                     CheckboxListTile(
                       title: const Text(
@@ -157,28 +175,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
                       activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
-                    ),
-                    const SizedBox(height: 20.0),
-                    // İlçe Dropdown
-                    DropdownButton<String>(
-                      value: selectedDistrict.isEmpty ? null : selectedDistrict,
-                      hint: const Text('İlçe seçiniz'),
-                      items: <String>[
-                        'Adalar',
-                        'Arnavutköy',
-                        'Ataşehir',
-                        // Diğer ilçeleri ekleyin
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedDistrict = newValue!;
-                        });
-                      },
                     ),
                     const SizedBox(height: 20.0),
                     ElevatedButton(
