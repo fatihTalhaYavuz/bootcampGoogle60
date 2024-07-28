@@ -14,13 +14,14 @@
 (https://trello.com/b/SitcivfB/bootcamp-grup-60)
 
 # Ürün Açıklaması
-AllGötür, ihtiyaç sahiplerinin ücretsiz olarak yemek yiyebilecekleri sürdürülebilir yaşam hedeflerinde ilk 3 maddesini hedefleyen.
-Restoranları ihtiyaç sahipleriyle buluşturan bir mobil yemek uygulamasıdır. 
-Böylece restoranlarda artık yemek kalmaması ve açlığa son vererek herkesin eşit derecede beslenebilmesi amaçlanmaktadır.
+AllGötür, sürdürülebilir yaşam hedefleri doğrultusunda kurulmuş bir mobil yemek uygulamasıdır. 
+Bu uygulama, restoranları ihtiyaç sahipleriyle buluşturarak yemek israfını önlemeyi ve toplumsal eşitliği desteklemeyi amaçlamaktadır. 
+Restoranların gün sonundaki yemek stoklarına göre yaptıkları bağışların ihtiyaç sahiplerine ulaşmasını hedeflenmektedir.
 
 # Ürün Özellikleri
-Restoranların ellerindeki yemek stoğuna göre yemek bağışında bulunabilmeleri.
-Kullanıcıların konumlarına yakın yerlerden rezervasyon yaparak ücretsiz olarak ulaşabilmeleri.
+Yemek Bağışı: Restoranlar, gün sonundaki yemek stoklarına göre AllGötür üzerinden yemek bağışında bulunabilirler.
+Rezervasyon İmkanı: Şu anda yalnızca İstanbul’da yaşayan kullanıcılar, kendilerine en yakın restoranlardan rezervasyon yaparak ücretsiz olarak bağışlanan yemeklere ulaşabilirler.
+Kolay Erişim: İhtiyaç sahipleri, uygulama üzerinden kolayca restoranları ve mevcut yemekleri görüntüleyebilir ve rezervasyon yapabilirler.
 
 # Hedef Kitle
 - Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
