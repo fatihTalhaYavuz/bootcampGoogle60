@@ -1,10 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/respwreset.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/resregister.dart'; // Kayıt ekranı dosyasını import ettik
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RestaurantLoginScreen extends StatelessWidget {
+class RestaurantLoginScreen extends StatefulWidget {
   const RestaurantLoginScreen({super.key});
+
+  @override
+  _RestaurantLoginScreenState createState() => _RestaurantLoginScreenState();
+}
+
+class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _login(BuildContext context) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      User? user = userCredential.user;
+
+      if (user != null) {
+        bool restaurantExists = await _checkIfRestaurantExists(user.uid);
+        if (restaurantExists) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ResHomeScreen(),
+            ),
+          );
+        } else {
+          // Kullanıcı restoran değilse hata mesajı göster
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Restoran kaydınız bulunamadı lütfen bilgilerinizi kontrol ediniz.')),
+          );
+        }
+      }
+    } catch (e) {
+      // Hata durumunda hata mesajı göster
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Giriş başarısız: ${e.toString()}')),
+      );
+    }
+  }
+
+  Future<bool> _checkIfRestaurantExists(String uid) async {
+    final districts = [
+      'Adalar',
+      'Arnavutköy',
+
+      // Diğer ilçeleri buraya ekleyin
+    ];
+
+    for (String district in districts) {
+      DocumentSnapshot doc = await _firestore
+          .collection('restaurants')
+          .doc(district)
+          .collection('details')
+          .doc(uid)
+          .get();
+
+      if (doc.exists) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +134,7 @@ class RestaurantLoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20.0),
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: 'E-mail',
                         filled: true,
@@ -77,6 +147,7 @@ class RestaurantLoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20.0),
                     TextField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: 'Şifre',
                         filled: true,
@@ -102,7 +173,7 @@ class RestaurantLoginScreen extends StatelessWidget {
                             );
                           },
                           child: const Text(
-                            'Şifresmi Unuttum!',
+                            'Şifremi Unuttum!',
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
@@ -125,7 +196,7 @@ class RestaurantLoginScreen extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: () {
-                        // Giriş yap işlemi
+                        _login(context);
                       },
                       child: const Text(
                         'Giriş Yap!',

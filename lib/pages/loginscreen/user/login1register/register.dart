@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -11,6 +13,16 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isChecked = true; // Checkbox'un başlangıç durumu
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String selectedDistrict = '';
+
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20.0),
                     // Ad Soyad TextField
                     TextField(
+                      controller: _nameController,
                       decoration: InputDecoration(
                         hintText: 'Ad Soyad',
                         filled: true,
@@ -89,6 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20.0),
                     // Telefon Numarası TextField
                     TextField(
+                      controller: _phoneController,
                       decoration: InputDecoration(
                         hintText: 'Telefon Numarası',
                         filled: true,
@@ -102,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20.0),
                     // Mail TextField
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: 'Mail',
                         filled: true,
@@ -115,6 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20.0),
                     // Şifre TextField
                     TextField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: 'Şifre',
                         filled: true,
@@ -143,9 +159,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
                     ),
                     const SizedBox(height: 20.0),
+                    // İlçe Dropdown
+                    DropdownButton<String>(
+                      value: selectedDistrict.isEmpty ? null : selectedDistrict,
+                      hint: const Text('İlçe seçiniz'),
+                      items: <String>[
+                        'Adalar',
+                        'Arnavutköy',
+                        'Ataşehir',
+                        // Diğer ilçeleri ekleyin
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedDistrict = newValue!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20.0),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // Kayıt ol işlemi
+                        if (_nameController.text.isEmpty ||
+                            _phoneController.text.isEmpty ||
+                            _emailController.text.isEmpty ||
+                            _passwordController.text.isEmpty ||
+                            !isChecked ||
+                            selectedDistrict.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Lütfen tüm alanları doldurun ve şartları kabul edin.')),
+                          );
+                          return;
+                        }
+
+                        try {
+                          UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          await _firestore.collection('users').doc(userCredential.user!.uid).set({
+                            'name': _nameController.text,
+                            'phone': _phoneController.text,
+                            'email': _emailController.text,
+                            'district': selectedDistrict,
+                            'role': 'user',
+                          });
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const UserLoginScreen(),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Kayıt sırasında bir hata oluştu: $e')),
+                          );
+                        }
                       },
                       child: const Text(
                         'Kayıt OL!',

@@ -143,22 +143,6 @@ class _ResRegScreenState extends State<ResRegScreen> {
                       obscureText: true, // Şifre alanını gizli yapar
                     ),
                     const SizedBox(height: 20.0),
-                    // Kullanım ve Gizlilik Şartları
-                    CheckboxListTile(
-                      title: const Text(
-                        'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
-                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
-                      ),
-                      value: isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
-                      checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
-                      activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
-                    ),
-                    const SizedBox(height: 20.0),
                     // İlçe Dropdown
                     DropdownButton<String>(
                       value: selectedDistrict.isEmpty ? null : selectedDistrict,
@@ -180,6 +164,23 @@ class _ResRegScreenState extends State<ResRegScreen> {
                         });
                       },
                     ),
+                    const SizedBox(height: 20.0),
+                    // Kullanım ve Gizlilik Şartları
+                    CheckboxListTile(
+                      title: const Text(
+                        'Kullanım ve Gizlilik Şartları\'nı okudum ve kabul ediyorum.',
+                        style: TextStyle(color: Colors.black), // Metin yazısını siyah yapar
+                      ),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
+                      checkColor: Colors.white, // Checkbox tik rengini beyaz yapar
+                      activeColor: Colors.black, // Checkbox arka plan rengini siyah yapar
+                    ),
+
                     const SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: () async {

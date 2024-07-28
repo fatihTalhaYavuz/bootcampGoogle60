@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
+import 'package:google_bootcamp_60/app_open_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class ResHomeScreen extends StatelessWidget {
   const ResHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -18,7 +22,7 @@ class ResHomeScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        elevation: 0,
         actions: [
           IconButton(
             icon: Image.asset(
@@ -26,8 +30,14 @@ class ResHomeScreen extends StatelessWidget {
               width: 50.0, // Increased cart icon width
               height: 50.0, // Increased cart icon height
             ),
-            onPressed: () {
-              // Cart button function
+            onPressed: () async {
+              await _auth.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AppOpenScreen(),
+                ),
+              );
             },
           ),
         ],
