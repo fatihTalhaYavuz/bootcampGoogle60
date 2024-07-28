@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
-class UserReserve extends StatefulWidget {
-  const UserReserve({super.key});
+class RestReserve extends StatefulWidget {
+  const RestReserve({super.key});
 
   @override
-  _UserReserveState createState() => _UserReserveState();
+  _RestReserveState createState() => _RestReserveState();
 }
 
-class _UserReserveState extends State<UserReserve> {
-  bool showCart = true; // Başlangıçta sepet gösterilir
+class _RestReserveState extends State<RestReserve> {
+  bool showCart = true; // Başlangıç durumu sepeti gösterir
   String selectedLocation = 'Kadıköy'; // Varsayılan seçim
-  final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli'];
-  int itemCount = 1; // Başlangıçta ürün sayısı
+  final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli']; // Lokasyonlar listesi
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar yüksekliği
+        toolbarHeight: 80.0, // AppBar yüksekliği (azaltılmış)
         backgroundColor: Colors.transparent, // Şeffaf arka plan
         elevation: 0, // Gölge yok
         leading: IconButton(
@@ -31,7 +30,7 @@ class _UserReserveState extends State<UserReserve> {
           alignment: Alignment(0.0, 0), // Ortalanmış
           child: Image.asset(
             'assets/allgotur.png',
-            height: 130.0, // Logo boyutu
+            height: 100.0, // Azaltılmış logo boyutu
           ),
         ),
         actions: [
@@ -39,8 +38,8 @@ class _UserReserveState extends State<UserReserve> {
             padding: const EdgeInsets.only(right: 16.0),
             child: Image.asset(
               'assets/sepet.png',
-              height: 50.0,
-              width: 50.0,
+              height: 40.0,
+              width: 40.0,
             ),
           ),
         ],
@@ -128,7 +127,7 @@ class _UserReserveState extends State<UserReserve> {
                             });
                           },
                           child: Text(
-                            'SEPETİM',
+                            'BAĞIŞLARIM',
                             style: TextStyle(
                               fontSize: 18.0,
                               color: showCart ? Colors.black : Colors.black38,
@@ -143,7 +142,7 @@ class _UserReserveState extends State<UserReserve> {
                             });
                           },
                           child: Text(
-                            'REZERVLERİM',
+                            'REZERVLER',
                             style: TextStyle(
                               fontSize: 18.0,
                               color: !showCart ? Colors.black : Colors.black38,
@@ -156,30 +155,19 @@ class _UserReserveState extends State<UserReserve> {
                 ),
                 SizedBox(height: 20.0),
                 Expanded(
-                  child: showCart ? buildCartContent() : buildReservationsContent(),
+                  child: showCart ? buildCartContent() : buildReservationsContent(), // İçeriği göster
                 ),
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomPaint(
-              painter: HalfCirclePainter(),
-              child: Container(
-                height: 100, // Butonun yüksekliğini artırdık
-                width: double.infinity,
-                child: Center(
-                  child: TextButton(
-                    onPressed: () {
-                      // Rezervasyonu onayla
-                    },
-                    child: Text(
-                      'REZERVASYONU ONAYLA',
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                // Yeni öğe ekle
+              },
+              child: Icon(Icons.add),
             ),
           ),
         ],
@@ -200,47 +188,31 @@ class _UserReserveState extends State<UserReserve> {
           ),
           child: Row(
             children: [
-              Image.asset('assets/taking_food.png', width: 50.0, height: 50.0),
+              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
               SizedBox(width: 10.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Öğeyi düzenle
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
                 ],
-              ),
-              Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.2), // Hafif yeşil arka plan
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.remove, color: Colors.green), // Azaltma ikonu
-                  onPressed: () {
-                    setState(() {
-                      if (itemCount > 0) {
-                        itemCount--;
-                      }
-                    });
-                  },
-                  iconSize: 24.0, // İkon boyutu
-                ),
-              ),
-              Text('$itemCount', style: TextStyle(fontSize: 18.0)),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.2), // Hafif yeşil arka plan
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.add, color: Colors.green), // Artırma ikonu
-                  onPressed: () {
-                    setState(() {
-                      itemCount++;
-                    });
-                  },
-                  iconSize: 24.0, // İkon boyutu
-                ),
               ),
             ],
           ),
@@ -262,20 +234,36 @@ class _UserReserveState extends State<UserReserve> {
           ),
           child: Row(
             children: [
-              Image.asset('assets/taking_food.png', width: 50.0, height: 50.0),
+              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
               SizedBox(width: 10.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Taking Food', style: TextStyle(fontSize: 18.0)),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Öğeyi düzenle
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
                 ],
               ),
-              Spacer(),
-              Text('1', style: TextStyle(fontSize: 18.0)),
             ],
           ),
         ),
-        // Daha fazla rezervasyon öğesi ekleyin
+        // Daha fazla rezervasyon öğesi buraya ekle
       ],
     );
   }

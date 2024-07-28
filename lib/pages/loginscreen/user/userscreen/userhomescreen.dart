@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product2.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreservescreen.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart'; // Import UserProfileScreen
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});
@@ -10,31 +13,83 @@ class UserHomeScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        title: Center(
-          child: Image.asset(
-            'assets/allgit.png',
-            height: 130.0, // Logo size
-          ),
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        title: Row(
+          children: [
+            // Konum seçimi bölümü
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0), // Logo ile konum seçimi arasına boşluk ekler
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'İstanbul',
+                        style: TextStyle(
+                          fontSize: 14.0, // Küçük yazı tipi boyutu
+                          color: Colors.green,
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        value: 'Kadıköy', // Varsayılan değer
+                        icon: Icon(Icons.arrow_drop_down, color: Colors.green),
+                        onChanged: (String? newValue) {
+                          // Konum değişikliğini işle
+                        },
+                        items: <String>['Kadıköy', 'Beşiktaş', 'Şişli']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // Logo bölümü
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft, // Resmi sola hizalar
+                child: Container(
+                  margin: const EdgeInsets.only(right: 60.0), // Resmi sola kaydırmak için margin ekleyin
+                  child: Image.asset(
+                    'assets/allgotur.png',
+                    height: 120.0, // Resmin boyutunu ayarlayın
+                    width: 120.0, // Genişlik ayarı
+                    fit: BoxFit.contain, // Resmin orantılı şekilde görünmesini sağlar
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         actions: [
           IconButton(
             icon: Image.asset(
               'assets/sepet.png',
-              width: 50.0, // Increased cart icon width
-              height: 50.0, // Increased cart icon height
+              width: 50.0, // Sepet simgesinin genişliği artırıldı
+              height: 50.0, // Sepet simgesinin yüksekliği artırıldı
             ),
             onPressed: () {
-              // Cart button function
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UserReserve(), // Uygun ekran ile güncelle
+                ),
+              );
             },
           ),
         ],
       ),
       body: Stack(
         children: [
-          // Background circles
+          // Arka plan daireleri
           Positioned(
             top: -150,
             left: -150,
@@ -61,66 +116,80 @@ class UserHomeScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              // Space after AppBar
-              SizedBox(height: kToolbarHeight + 65), // AppBar height + 65 pixels
-              // Banner section
+              // AppBar'dan sonraki boşluk
+              SizedBox(height: kToolbarHeight + 65), // AppBar yüksekliği + 65 piksel
+
+              // Banner bölümü
               Container(
-                height: 200.0, // Banner height
-                margin: const EdgeInsets.symmetric(horizontal: 10.0), // Horizontal margin
+                height: 200.0, // Banner yüksekliği
+                margin: const EdgeInsets.symmetric(horizontal: 10.0), // Yatay margin
                 child: PageView(
                   children: [
-                    Image.asset('assets/banner3.png', fit: BoxFit.cover), // Banner images
+                    Image.asset('assets/banner3.png', fit: BoxFit.cover), // Banner resimleri
                     Image.asset('assets/banner1.png', fit: BoxFit.cover),
                     Image.asset('assets/banner2.png', fit: BoxFit.cover),
                   ],
                 ),
               ),
-              SizedBox(height: 20.0), // Space below banners
-              // Product list
+              SizedBox(height: 20.0), // Bannerların altındaki boşluk
+
+              // Ürün listesi
               Expanded(
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
                     _buildProductItem(
                       context,
-                      'assets/taking_food.png', // Product logo path
+                      'assets/taking_food.png', // Ürün logo yolu
                       'Taking Food',
                       'Şirket Yemek Belirtmedi',
                       '22.00-22.30',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2), // Güncellenen renk
                       () {
-                        // Define the action when the card is tapped
-                        print('Taking Food tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product(), // TakingFoodScreen'e git
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
                       context,
-                      'assets/bonfire.png', // Product logo path
+                      'assets/bonfire.png', // Ürün logo yolu
                       'Bonfire',
                       'Domates Çorbası',
                       '23.00-23.30',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2), // Güncellenen renk
                       () {
-                        // Define the action when the card is tapped
-                        print('Bonfire tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product2(), // BonfireScreen'e git
+                          ),
+                        );
                       },
                     ),
                     _buildProductItem(
                       context,
-                      'assets/grill.png', // Product logo path
+                      'assets/grill.png', // Ürün logo yolu
                       'Grill',
                       'Şirket Çeşit Belirtmedi',
                       '23.45-23.59',
                       Colors.green,
-                      Color(0xFFFFCDD2), // Ana yazı rengi
+                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2), // Güncellenen renk
                       () {
-                        // Define the action when the card is tapped
-                        print('Grill tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Product3(), // GrillScreen'e git
+                          ),
+                        );
                       },
                     ),
-                    // Add other products here
+                    // Diğer ürünleri buraya ekleyin
                   ],
                 ),
               ),
@@ -131,25 +200,25 @@ class UserHomeScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Transparent background
-        elevation: 0, // No shadow
+        color: Color.fromARGB(255, 255, 255, 255), // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Boyut artırıldı
               onPressed: () {
-                // Home button function
+                // Ana sayfa buton fonksiyonu
               },
             ),
-            SizedBox(width: 90.0), // Space for the floating action button
+            SizedBox(width: 90.0), // Yüzen eylem düğmesi için boşluk
             IconButton(
-              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Boyut artırıldı
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const UserProfileScreen(), // Navigate to UserProfileScreen
+                    builder: (context) => const UserProfileScreen(), // UserProfileScreen'e git
                   ),
                 );
               },
@@ -163,19 +232,27 @@ class UserHomeScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const UserReserve(), // Update with appropriate screen
+              builder: (context) => const UserReserve(), // Uygun ekran ile güncelle
             ),
           );
         },
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
-        child: Image.asset('assets/shopping.png', width: 130.0, height: 130.0), // Increased size of the add button
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
+        child: Image.asset('assets/shopping.png', width: 130.0, height: 130.0), // Ekleme düğmesinin boyutu artırıldı
       ),
     );
   }
 
-  // Product card creation function
-  Widget _buildProductItem(BuildContext context, String logoPath, String title, String subtitle, String time, Color logoBgColor, Color cardBgColor, VoidCallback onTap) {
+  // Ürün kartı oluşturma fonksiyonu
+  Widget _buildProductItem(
+      BuildContext context,
+      String logoPath,
+      String title,
+      String subtitle,
+      String time,
+      Color logoBgColor,
+      Color cardBgColor,
+      VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -193,23 +270,23 @@ class UserHomeScreen extends StatelessWidget {
                 color: logoBgColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Image.asset(logoPath, width: 60.0, height: 60.0), // Increased size of logo
+              child: Image.asset(logoPath, width: 60.0, height: 60.0), // Logo boyutu artırıldı
             ),
             SizedBox(width: 10.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)), // Increased font size and bold
-                  Text(subtitle, style: TextStyle(fontSize: 14.0, color: Colors.grey[700])), // Increased font size
+                  Text(title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)), // Yazı tipi boyutu ve kalınlığı artırıldı
+                  Text(subtitle, style: TextStyle(fontSize: 14.0, color: Colors.grey[700])), // Yazı tipi boyutu artırıldı
                 ],
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(time, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)), // Increased font size and bold
-                const Icon(Icons.access_time, size: 20.0), // Adjusted icon size
+                Text(time, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)), // Yazı tipi boyutu ve kalınlığı artırıldı
+                const Icon(Icons.access_time, size: 20.0), // Simge boyutu ayarlandı
               ],
             ),
           ],
