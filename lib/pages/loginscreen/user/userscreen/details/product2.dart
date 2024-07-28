@@ -8,27 +8,27 @@ class Product2 extends StatefulWidget {
 }
 
 class _Product2State extends State<Product2> {
-  int itemCount = 1;
+  int itemCount = 1; // Ürün sayısını tutmak için değişken
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(-0.1, 0), // Slightly left-aligned
+          alignment: Alignment(0.3, 0), // Hafif sola hizalanmış
           child: Image.asset(
-            'assets/reshome.png',
-            height: 130.0, // Logo size
+            'assets/allgotur.png',
+            height: 90.0, // Logo boyutu
           ),
         ),
         actions: [
@@ -113,7 +113,7 @@ class _Product2State extends State<Product2> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Mantığınızı buraya ekleyin
                             },
                             child: Text(
                               '22.00-22.30',
@@ -126,7 +126,7 @@ class _Product2State extends State<Product2> {
                           VerticalDivider(color: Colors.black),
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Mantığınızı buraya ekleyin
                             },
                             child: Icon(Icons.close, color: Colors.black),
                           ),
@@ -210,7 +210,7 @@ class _Product2State extends State<Product2> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.remove, color: Colors.black),
+                          icon: Icon(Icons.remove, color: Colors.black), // Azaltma ikonu
                           onPressed: () {
                             setState(() {
                               if (itemCount > 1) {
@@ -219,9 +219,9 @@ class _Product2State extends State<Product2> {
                             });
                           },
                         ),
-                        Text('$itemCount', style: TextStyle(fontSize: 18.0)),
+                        Text('$itemCount', style: TextStyle(fontSize: 18.0)), // Ürün sayısı
                         IconButton(
-                          icon: Icon(Icons.add, color: Colors.black),
+                          icon: Icon(Icons.add, color: Colors.black), // Arttırma ikonu
                           onPressed: () {
                             setState(() {
                               itemCount++;
@@ -230,7 +230,7 @@ class _Product2State extends State<Product2> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            // Add to cart
+                            // Sepete ekle
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,

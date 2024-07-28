@@ -26,26 +26,26 @@ class _ResProfileState extends State<ResProfile> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(-0.2, 0), // Slightly left-aligned
+          alignment: Alignment(-0.2, 0), // Hafif sola hizalanmış
           child: Image.asset(
             'assets/allgotur.png',
-            height: 80.0, // Logo size
+            height: 80.0, // Logo boyutu
           ),
         ),
       ),
       body: Stack(
         children: [
-          // Upper circle
+          // Üstteki daire
           Positioned(
             top: -150,
             left: -150,
@@ -58,7 +58,7 @@ class _ResProfileState extends State<ResProfile> {
               ),
             ),
           ),
-          // Lower circle
+          // Alttaki daire
           Positioned(
             bottom: -180,
             right: -150,
@@ -101,7 +101,7 @@ class _ResProfileState extends State<ResProfile> {
                       const SizedBox(height: 10.0),
                       _buildInfoRow(Icons.location_on, addressController.text),
                       const SizedBox(
-                          height: 20.0), // Reduced space before buttons
+                          height: 20.0), // Butonlardan önce azaltılmış boşluk
                       ElevatedButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -111,7 +111,7 @@ class _ResProfileState extends State<ResProfile> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red, // Background color
+                          backgroundColor: Colors.red, // Arka plan rengi
                           padding: EdgeInsets.symmetric(horizontal: 50.0),
                         ),
                         child: Text('ÇIKIŞ YAP'),
@@ -124,7 +124,7 @@ class _ResProfileState extends State<ResProfile> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color
+                          backgroundColor: Colors.green, // Arka plan rengi
                           padding: EdgeInsets.symmetric(horizontal: 50.0),
                         ),
                         child:
@@ -141,14 +141,14 @@ class _ResProfileState extends State<ResProfile> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Background color
-        elevation: 0, // No shadow
+        color: Color.fromARGB(255, 255, 255, 255), // Arka plan rengi
+        elevation: 0, // Gölge yok
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
               icon: Image.asset('assets/home.png',
-                  width: 80.0, height: 80.0), // Adjusted size
+                  width: 80.0, height: 80.0), // Ayarlanmış boyut
               onPressed: () {
                 Navigator.push(
                   context,
@@ -158,7 +158,7 @@ class _ResProfileState extends State<ResProfile> {
                 );
               },
             ),
-            SizedBox(width: 40.0), // Space between home and profile
+            SizedBox(width: 40.0), // Ana sayfa ve profil arasında boşluk
             FloatingActionButton(
               onPressed: () {
                 Navigator.push(
@@ -168,15 +168,15 @@ class _ResProfileState extends State<ResProfile> {
                   ),
                 );
               },
-              backgroundColor: Colors.transparent, // Transparent background
-              elevation: 0, // No shadow
+              backgroundColor: Colors.transparent, // Şeffaf arka plan
+              elevation: 0, // Gölge yok
               child: Image.asset('assets/plus.png',
-                  width: 100.0, height: 100.0), // Adjusted size
+                  width: 100.0, height: 100.0), // Ayarlanmış boyut
             ),
-            SizedBox(width: 40.0), // Space between profile and floating button
+            SizedBox(width: 40.0), // Profil ve floating button arasında boşluk
             IconButton(
               icon: Image.asset('assets/profile.png',
-                  width: 80.0, height: 80.0), // Adjusted size
+                  width: 80.0, height: 80.0), // Ayarlanmış boyut
               onPressed: () {
                 Navigator.push(
                   context,

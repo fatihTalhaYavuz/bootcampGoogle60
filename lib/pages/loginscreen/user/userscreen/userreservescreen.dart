@@ -8,30 +8,30 @@ class UserReserve extends StatefulWidget {
 }
 
 class _UserReserveState extends State<UserReserve> {
-  bool showCart = true; // Initial state shows the cart
-  String selectedLocation = 'Kadıköy'; // Default selection
+  bool showCart = true; // Başlangıçta sepet gösterilir
+  String selectedLocation = 'Kadıköy'; // Varsayılan seçim
   final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli'];
-  int itemCount = 1; // Initial item count
+  int itemCount = 1; // Başlangıçta ürün sayısı
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(0.0, 0), // Centered
+          alignment: Alignment(0.0, 0), // Ortalanmış
           child: Image.asset(
-            'assets/reshome.png',
-            height: 130.0, // Logo size
+            'assets/allgotur.png',
+            height: 130.0, // Logo boyutu
           ),
         ),
         actions: [
@@ -171,7 +171,7 @@ class _UserReserveState extends State<UserReserve> {
                 child: Center(
                   child: TextButton(
                     onPressed: () {
-                      // Confirm reservation
+                      // Rezervasyonu onayla
                     },
                     child: Text(
                       'REZERVASYONU ONAYLA',
@@ -215,7 +215,7 @@ class _UserReserveState extends State<UserReserve> {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.remove, color: Colors.green), // Decrease icon
+                  icon: Icon(Icons.remove, color: Colors.green), // Azaltma ikonu
                   onPressed: () {
                     setState(() {
                       if (itemCount > 0) {
@@ -233,7 +233,7 @@ class _UserReserveState extends State<UserReserve> {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.add, color: Colors.green), // Increase icon
+                  icon: Icon(Icons.add, color: Colors.green), // Artırma ikonu
                   onPressed: () {
                     setState(() {
                       itemCount++;
@@ -275,7 +275,7 @@ class _UserReserveState extends State<UserReserve> {
             ],
           ),
         ),
-        // Add more reservation items here
+        // Daha fazla rezervasyon öğesi ekleyin
       ],
     );
   }

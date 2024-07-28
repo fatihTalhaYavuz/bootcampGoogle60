@@ -8,29 +8,29 @@ class RestReserve extends StatefulWidget {
 }
 
 class _RestReserveState extends State<RestReserve> {
-  bool showCart = true; // Initial state shows the cart
-  String selectedLocation = 'Kadıköy'; // Default selection
-  final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli'];
+  bool showCart = true; // Başlangıç durumu sepeti gösterir
+  String selectedLocation = 'Kadıköy'; // Varsayılan seçim
+  final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli']; // Lokasyonlar listesi
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 80.0, // AppBar height (reduced)
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 80.0, // AppBar yüksekliği (azaltılmış)
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(0.0, 0), // Centered
+          alignment: Alignment(0.0, 0), // Ortalanmış
           child: Image.asset(
-            'assets/reshome.png',
-            height: 100.0, // Reduced logo size
+            'assets/allgotur.png',
+            height: 100.0, // Azaltılmış logo boyutu
           ),
         ),
         actions: [
@@ -155,7 +155,7 @@ class _RestReserveState extends State<RestReserve> {
                 ),
                 SizedBox(height: 20.0),
                 Expanded(
-                  child: showCart ? buildCartContent() : buildReservationsContent(),
+                  child: showCart ? buildCartContent() : buildReservationsContent(), // İçeriği göster
                 ),
               ],
             ),
@@ -165,7 +165,7 @@ class _RestReserveState extends State<RestReserve> {
             right: 20.0,
             child: FloatingActionButton(
               onPressed: () {
-                // Add new item
+                // Yeni öğe ekle
               },
               child: Icon(Icons.add),
             ),
@@ -203,7 +203,7 @@ class _RestReserveState extends State<RestReserve> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Edit item
+                      // Öğeyi düzenle
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -249,7 +249,7 @@ class _RestReserveState extends State<RestReserve> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Edit item
+                      // Öğeyi düzenle
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -263,7 +263,7 @@ class _RestReserveState extends State<RestReserve> {
             ],
           ),
         ),
-        // Add more reservation items here
+        // Daha fazla rezervasyon öğesi buraya ekle
       ],
     );
   }

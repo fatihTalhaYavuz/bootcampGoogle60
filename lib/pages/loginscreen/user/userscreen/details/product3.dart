@@ -8,20 +8,20 @@ class Product3 extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arkaplan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(-0.1, 0), // Slightly left-aligned
+          alignment: Alignment(0.3, 0), // Hafif sola hizalanmış
           child: Image.asset(
-            'assets/reshome.png',
-            height: 130.0, // Logo size
+            'assets/allgotur.png',
+            height: 90.0, // Logo boyutu
           ),
         ),
         actions: [
@@ -106,7 +106,7 @@ class Product3 extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Zaman seçimi işlemi burada yapılacak
                             },
                             child: Text(
                               '22.00-22.30',
@@ -119,7 +119,7 @@ class Product3 extends StatelessWidget {
                           VerticalDivider(color: Colors.black),
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Kapatma işlemi burada yapılacak
                             },
                             child: Icon(Icons.close, color: Colors.black),
                           ),
@@ -205,19 +205,19 @@ class Product3 extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.remove, color: Colors.black),
                           onPressed: () {
-                            // Decrease item count
+                            // Ürün sayısını azalt
                           },
                         ),
                         Text('1', style: TextStyle(fontSize: 18.0)),
                         IconButton(
                           icon: Icon(Icons.add, color: Colors.black),
                           onPressed: () {
-                            // Increase item count
+                            // Ürün sayısını arttır
                           },
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            // Add to cart
+                            // Sepete ekle işlemi burada yapılacak
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,

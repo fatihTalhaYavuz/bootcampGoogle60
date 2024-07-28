@@ -9,12 +9,12 @@ class ResAddScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
+        toolbarHeight: 100.0, // AppBar yüksekliği
         title: Row(
           children: [
-            // Location selection section
+            // Konum seçimi bölümü
             Padding(
-              padding: const EdgeInsets.only(right: 16.0), // Add space between logo and location selection
+              padding: const EdgeInsets.only(right: 16.0), // Logo ve konum seçimi arasına boşluk ekle
               child: Row(
                 children: [
                   Column(
@@ -23,15 +23,15 @@ class ResAddScreen extends StatelessWidget {
                       Text(
                         'İstanbul',
                         style: TextStyle(
-                          fontSize: 14.0, // Smaller font size
+                          fontSize: 14.0, // Daha küçük font boyutu
                           color: Colors.green,
                         ),
                       ),
                       DropdownButton<String>(
-                        value: 'Kadıköy', // Default value
+                        value: 'Kadıköy', // Varsayılan değer
                         icon: Icon(Icons.arrow_drop_down, color: Colors.green),
                         onChanged: (String? newValue) {
-                          // Handle the location change
+                          // Konum değişikliği işleme
                         },
                         items: <String>['Kadıköy', 'Beşiktaş', 'Şişli']
                             .map<DropdownMenuItem<String>>((String value) {
@@ -46,14 +46,14 @@ class ResAddScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Logo section
+            // Logo bölümü
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft, // Resmi sola hizalar
                 child: Container(
                   margin: const EdgeInsets.only(right: 60.0), // Resmi sola kaydırmak için margin ekleyin
                   child: Image.asset(
-                    'assets/reshome.png',
+                    'assets/allgotur.png',
                     height: 120.0, // Resmin boyutunu ayarlayın
                     width: 120.0, // Genişlik ayarı
                     fit: BoxFit.contain, // Resmin orantılı şekilde görünmesini sağlar
@@ -63,24 +63,24 @@ class ResAddScreen extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         actions: [
           IconButton(
             icon: Image.asset(
               'assets/zerogoal.png',
-              width: 50.0, // Increased cart icon width
-              height: 50.0, // Increased cart icon height
+              width: 50.0, // Sepet ikonunun genişliği arttırıldı
+              height: 50.0, // Sepet ikonunun yüksekliği arttırıldı
             ),
             onPressed: () {
-              // Cart button function
+              // Sepet butonu fonksiyonu
             },
           ),
         ],
       ),
       body: Stack(
         children: [
-          // Upper green circle
+          // Üst yeşil daire
           Positioned(
             top: -150,
             left: -150,
@@ -93,7 +93,7 @@ class ResAddScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Lower green circle
+          // Alt yeşil daire
           Positioned(
             bottom: -180,
             right: -150,
@@ -106,14 +106,14 @@ class ResAddScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Form and content
+          // Form ve içerik
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: kToolbarHeight + 30), // Space after AppBar
+                  SizedBox(height: kToolbarHeight + 30), // AppBar sonrası boşluk
                   Center(
                     child: Image.asset(
                       'assets/bagis.png',
@@ -147,7 +147,7 @@ class ResAddScreen extends StatelessWidget {
                       );
                     }).toList(),
                     onChanged: (String? newValue) {
-                      // Handle change
+                      // Değişiklik işleme
                     },
                     decoration: InputDecoration(
                       labelText: 'Yemek Türü',
@@ -199,14 +199,14 @@ class ResAddScreen extends StatelessWidget {
                   SizedBox(height: 10.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle image upload
+                      // Görsel yükleme işleme
                     },
                     child: Text('Görsel Ekle'),
                   ),
                   SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle form submission
+                      // Form gönderme işleme
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -224,20 +224,20 @@ class ResAddScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Transparent background
-        elevation: 0, // No shadow
+        color: Color.fromARGB(255, 255, 255, 255), // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Boyut arttırıldı
               onPressed: () {
-                // Home button function
+                // Ana sayfa butonu fonksiyonu
               },
             ),
-            SizedBox(width: 90.0), // Space for the floating action button
+            SizedBox(width: 90.0), // Yüzer aksiyon butonu için boşluk
             IconButton(
-              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Increased size
+              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Boyut arttırıldı
               onPressed: () {
                 Navigator.push(
                   context,
@@ -260,9 +260,9 @@ class ResAddScreen extends StatelessWidget {
             ),
           );
         },
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
-        child: Image.asset('assets/plus.png', width: 130.0, height: 130.0), // Increased size of the add button
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
+        child: Image.asset('assets/plus.png', width: 130.0, height: 130.0), // Ekle butonunun boyutu arttırıldı
       ),
     );
   }

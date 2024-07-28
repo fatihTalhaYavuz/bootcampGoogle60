@@ -77,6 +77,7 @@ flutter:
     - assets/add.png
     - assets/remove.png
     - assets/bagis.png
+    - assets/alg.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

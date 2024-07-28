@@ -15,20 +15,20 @@ class _ProductState extends State<Product> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arkaplan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Align(
-          alignment: Alignment(-0.1, 0), // Slightly left-aligned
+          alignment: Alignment(0.3, 0), // Biraz sola hizalanmış
           child: Image.asset(
-            'assets/reshome.png',
-            height: 130.0, // Logo size
+            'assets/allgotur.png',
+            height: 90.0, // Logo boyutu
           ),
         ),
         actions: [
@@ -113,7 +113,7 @@ class _ProductState extends State<Product> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Kendi mantığını ekleyin
                             },
                             child: Text(
                               '22.00-22.30',
@@ -126,7 +126,7 @@ class _ProductState extends State<Product> {
                           VerticalDivider(color: Colors.black),
                           GestureDetector(
                             onTap: () {
-                              // Add your logic here
+                              // Kendi mantığını ekleyin
                             },
                             child: Icon(Icons.close, color: Colors.black),
                           ),
@@ -230,7 +230,7 @@ class _ProductState extends State<Product> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            // Add to cart
+                            // Sepete ekle
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,

@@ -11,7 +11,7 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
-  bool isEditing = false;
+  bool isEditing = false; // Düzenleme modunu kontrol eder
   final TextEditingController emailController = TextEditingController(text: 'all.gotur@gmail.com');
   final TextEditingController nameController = TextEditingController(text: 'ALİ GÖTÜR');
   final TextEditingController phoneController = TextEditingController(text: '0 505 505 55 00');
@@ -22,26 +22,26 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar height
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // No shadow
+        toolbarHeight: 100.0, // AppBar yüksekliği
+        backgroundColor: Colors.transparent, // Şeffaf arka plan
+        elevation: 0, // Gölge yok
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); // Önceki ekrana dön
           },
         ),
         title: Align(
-          alignment: Alignment(-0.2, 0), // Slightly left-aligned
+          alignment: Alignment(-0.2, 0), // Hafif sola hizalanmış
           child: Image.asset(
             'assets/allgotur.png',
-            height: 80.0, // Logo size
+            height: 80.0, // Logo boyutu
           ),
         ),
       ),
       body: Stack(
         children: [
-          // Upper circle
+          // Üst daire
           Positioned(
             top: -150,
             left: -150,
@@ -54,7 +54,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
           ),
-          // Lower circle
+          // Alt daire
           Positioned(
             bottom: -180,
             right: -150,
@@ -72,11 +72,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: kToolbarHeight + 20),
+                SizedBox(height: kToolbarHeight + 20), // AppBar yüksekliği + 20 piksel boşluk
                 Center(
                   child: Column(
                     children: [
-                      // Removed the "taking_food.png" logo
                       const SizedBox(height: 20.0),
                       Text(
                         'KULLANICI HESABIM',
@@ -86,14 +85,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      _buildInfoRow(Icons.email, emailController.text),
+                      _buildInfoRow(Icons.email, emailController.text), // E-posta bilgisi
                       const SizedBox(height: 10.0),
-                      _buildInfoRow(Icons.person, nameController.text),
+                      _buildInfoRow(Icons.person, nameController.text), // İsim bilgisi
                       const SizedBox(height: 10.0),
-                      _buildInfoRow(Icons.phone, phoneController.text),
+                      _buildInfoRow(Icons.phone, phoneController.text), // Telefon bilgisi
                       const SizedBox(height: 10.0),
-                      _buildInfoRow(Icons.location_on, addressController.text),
-                      const SizedBox(height: 30.0), // Increased space before buttons
+                      _buildInfoRow(Icons.location_on, addressController.text), // Adres bilgisi
+                      const SizedBox(height: 30.0), // Butonlar arasındaki boşluk artırıldı
                       ElevatedButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -102,8 +101,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red, // Background color
-                          padding: EdgeInsets.symmetric(horizontal: 50.0),
+                          backgroundColor: Colors.red, // Arka plan rengi
+                          padding: EdgeInsets.symmetric(horizontal: 50.0), // Buton yastığı
                         ),
                         child: Text('ÇIKIŞ YAP'),
                       ),
@@ -111,14 +110,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            isEditing = !isEditing;
+                            isEditing = !isEditing; // Düzenleme modunu değiştir
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color
-                          padding: EdgeInsets.symmetric(horizontal: 50.0),
+                          backgroundColor: Colors.green, // Arka plan rengi
+                          padding: EdgeInsets.symmetric(horizontal: 50.0), // Buton yastığı
                         ),
-                        child: Text(isEditing ? 'Kaydet' : 'Bilgilerimi Düzenle'),
+                        child: Text(isEditing ? 'Kaydet' : 'Bilgilerimi Düzenle'), // Buton metni
                       ),
                     ],
                   ),
@@ -126,39 +125,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ],
             ),
           ),
-          // Floating action button
+          // Yüzen eylem düğmesi
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0), // Adjusted padding
+              padding: const EdgeInsets.only(bottom: 10.0), // Alt yastık
               child: FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const UserReserve(), // Update with appropriate screen
+                      builder: (context) => const UserReserve(), // Uygun ekran ile güncelle
                     ),
                   );
                 },
-                backgroundColor: Colors.transparent, // Transparent background
-                elevation: 0, // No shadow
-                child: SizedBox.shrink(), // Empty button
+                backgroundColor: Colors.transparent, // Şeffaf arka plan
+                elevation: 0, // Gölge yok
+                child: SizedBox.shrink(), // Boş düğme
               ),
             ),
           ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Background color
-        elevation: 0, // No shadow
+        shape: CircularNotchedRectangle(), // Notch şekli
+        notchMargin: 10.0, // Notch marjı
+        color: Color.fromARGB(255, 255, 255, 255), // Arka plan rengi
+        elevation: 0, // Gölge yok
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
               icon: Image.asset('assets/home.png',
-                  width: 80.0, height: 80.0), // Adjusted size
+                  width: 80.0, height: 80.0), // Boyut ayarlandı
               onPressed: () {
                 Navigator.push(
                   context,
@@ -168,7 +167,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 );
               },
             ),
-            SizedBox(width: 40.0), // Space between home and profile
+            SizedBox(width: 40.0), // Ana sayfa ve profil arasında boşluk
             FloatingActionButton(
               onPressed: () {
                 Navigator.push(
@@ -178,15 +177,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                 );
               },
-              backgroundColor: Colors.transparent, // Transparent background
-              elevation: 0, // No shadow
+              backgroundColor: Colors.transparent, // Şeffaf arka plan
+              elevation: 0, // Gölge yok
               child: Image.asset('assets/shopping.png',
-                  width: 100.0, height: 100.0), // Adjusted size
+                  width: 100.0, height: 100.0), // Boyut ayarlandı
             ),
-            SizedBox(width: 40.0), // Space between profile and floating button
+            SizedBox(width: 40.0), // Profil ve yüzen düğme arasında boşluk
             IconButton(
               icon: Image.asset('assets/profile.png',
-                  width: 80.0, height: 80.0), // Adjusted size
+                  width: 80.0, height: 80.0), // Boyut ayarlandı
               onPressed: () {
                 Navigator.push(
                   context,
@@ -202,21 +201,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
+  // Bilgi satırı oluşturma fonksiyonu
   Widget _buildInfoRow(IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 30.0),
+        Icon(icon, size: 30.0), // İkon boyutu
         const SizedBox(width: 10.0),
         Expanded(
           child: TextField(
-            controller: TextEditingController(text: text),
-            enabled: isEditing,
+            controller: TextEditingController(text: text), // Metin kontrolcüsü
+            enabled: isEditing, // Düzenleme moduna göre etkinleştirilir
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(15.0), // Kenar yuvarlama
               ),
               filled: true,
-              fillColor: Colors.green.withOpacity(0.1),
+              fillColor: Colors.green.withOpacity(0.1), // Doldurulmuş arka plan rengi
             ),
           ),
         ),
