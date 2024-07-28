@@ -2,9 +2,85 @@ import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/pwreset.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/register.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userhomescreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UserLoginScreen extends StatelessWidget {
+class UserLoginScreen extends StatefulWidget {
   const UserLoginScreen({super.key});
+
+  @override
+  _UserLoginScreenState createState() => _UserLoginScreenState();
+  }
+
+  class _UserLoginScreenState extends State<UserLoginScreen> {
+
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+
+    void _loginUser() async{
+
+      try {
+        // Firebase Authentication ile kullanıcı girişi
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        // Kullanıcının Firestore'da mevcut olup olmadığını kontrol et
+        DocumentSnapshot userDoc = await _firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .get();
+
+        if (userDoc.exists) {
+          // Kullanıcı mevcut, ana sayfaya yönlendir
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const UserHomeScreen(),
+            ),
+          );
+        } else {
+          // Kullanıcı Firestore'da mevcut değil
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Hata'),
+              content: Text('Kullanıcı hesabınız yok.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Tamam'),
+                ),
+              ],
+            ),
+          );
+        }
+      } catch (e) {
+        // Giriş işlemi başarısız
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Hata'),
+            content: Text('Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Tamam'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +146,7 @@ class UserLoginScreen extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     // E-mail TextField
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: 'E-mail',
                         hintStyle: TextStyle(
@@ -88,6 +165,7 @@ class UserLoginScreen extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     // Şifre TextField
                     TextField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: 'Şifre',
                         hintStyle: TextStyle(
@@ -144,9 +222,7 @@ class UserLoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 2.0),
                     ElevatedButton(
-                      onPressed: () {
-                        // Giriş yap işlemi
-                      },
+                      onPressed: _loginUser,
                       child: const Text(
                         'Giriş Yap!',
                         style: TextStyle(
