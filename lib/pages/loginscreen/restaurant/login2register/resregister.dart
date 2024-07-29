@@ -145,7 +145,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                     ),
                     const SizedBox(height: 20.0),
                     // İlçe Dropdown
-                    DropdownButton<String>(
+                    DropdownButtonFormField<String>(
                       value: selectedDistrict.isEmpty ? null : selectedDistrict,
                       hint: const Text('İlçe seçiniz'),
                       items: Districts.istanbulDistricts.map<DropdownMenuItem<String>>((String value) {
@@ -159,6 +159,13 @@ class _ResRegScreenState extends State<ResRegScreen> {
                           selectedDistrict = newValue!;
                         });
                       },
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: lgnback,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                    ),
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     // Kullanım ve Gizlilik Şartları
