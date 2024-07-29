@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/restreserves.dart';
 
 class ResAddScreen extends StatelessWidget {
   const ResAddScreen({super.key});
@@ -73,7 +75,12 @@ class ResAddScreen extends StatelessWidget {
               height: 50.0, // Sepet ikonunun yüksekliği arttırıldı
             ),
             onPressed: () {
-              // Sepet butonu fonksiyonu
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RestReserve(),
+                ),
+              );
             },
           ),
         ],
@@ -232,7 +239,12 @@ class ResAddScreen extends StatelessWidget {
             IconButton(
               icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Boyut arttırıldı
               onPressed: () {
-                // Ana sayfa butonu fonksiyonu
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResHomeScreen(),
+                  ),
+                );
               },
             ),
             SizedBox(width: 90.0), // Yüzer aksiyon butonu için boşluk

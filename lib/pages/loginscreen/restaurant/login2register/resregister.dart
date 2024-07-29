@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
 import 'package:google_bootcamp_60/districts.dart';
 
