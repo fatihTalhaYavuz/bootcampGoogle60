@@ -9,40 +9,25 @@ class RestReserve extends StatefulWidget {
 
 class _RestReserveState extends State<RestReserve> {
   bool showCart = true; // Başlangıç durumu sepeti gösterir
-  String selectedLocation = 'Kadıköy'; // Varsayılan seçim
-  final List<String> locations = ['Kadıköy', 'Beşiktaş', 'Şişli']; // Lokasyonlar listesi
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 80.0, // AppBar yüksekliği (azaltılmış)
-        backgroundColor: Colors.transparent, // Şeffaf arka plan
-        elevation: 0, // Gölge yok
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Align(
-          alignment: Alignment(0.0, 0), // Ortalanmış
+        toolbarHeight: 100.0,
+        flexibleSpace: Center(
           child: Image.asset(
             'assets/allgotur.png',
-            height: 100.0, // Azaltılmış logo boyutu
+            height: 90.0,
+            width: 90.0,
+            fit: BoxFit.contain,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Image.asset(
-              'assets/sepet.png',
-              height: 40.0,
-              width: 40.0,
-            ),
-          ),
-        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+
       ),
       body: Stack(
         children: [
@@ -76,40 +61,8 @@ class _RestReserveState extends State<RestReserve> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                SizedBox(height: kToolbarHeight + 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'İstanbul',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            color: Colors.green,
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          value: selectedLocation,
-                          icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedLocation = newValue!;
-                            });
-                          },
-                          items: locations.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0),
+
+                SizedBox(height: kToolbarHeight + 50.0),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.lightGreen[100],
