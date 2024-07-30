@@ -4,50 +4,59 @@ import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/pro
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userprofilescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreservescreen.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
-class UserHomeScreen extends StatelessWidget {
+class UserHomeScreen extends StatefulWidget {
   const UserHomeScreen({super.key});
 
+  @override
+  _UserHomeScreenState createState() => _UserHomeScreenState();
+}
+
+class _UserHomeScreenState extends State<UserHomeScreen> {
+  String _selectedDistrict = 'Kadıköy'; // Varsayılan değer
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 100.0, // AppBar yüksekliği
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             // Konum seçimi bölümü
             Padding(
-              padding: const EdgeInsets.only(right: 16.0), // Logo ile konum seçimi arasına boşluk ekler
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'İstanbul',
-                        style: TextStyle(
-                          fontSize: 14.0, // Küçük yazı tipi boyutu
-                          color: Colors.green,
-                        ),
+              padding: const EdgeInsets.only(right: 5.0), // Logo ile konum seçimi arasına boşluk ekler
+              child: Container(
+                width: 150.0, // Sabit genişlik
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'İstanbul',
+                      style: TextStyle(
+                        fontSize: 14.0, // Küçük yazı tipi boyutu
+                        color: Colors.green,
                       ),
-                      DropdownButton<String>(
-                        value: 'Kadıköy', // Varsayılan değer
-                        icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-                        onChanged: (String? newValue) {
-                          // Konum değişikliğini işle
-                        },
-                        items: <String>['Kadıköy', 'Beşiktaş', 'Şişli']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                    DropdownButton<String>(
+                      value: _selectedDistrict, // Seçilen değeri gösterir
+                      icon: Icon(Icons.arrow_drop_down, color: Colors.green),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedDistrict = newValue!;
+                        });
+                      },
+                      items: Districts.istanbulDistricts
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Logo bölümü
@@ -58,8 +67,8 @@ class UserHomeScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 60.0), // Resmi sola kaydırmak için margin ekleyin
                   child: Image.asset(
                     'assets/allgotur.png',
-                    height: 120.0, // Resmin boyutunu ayarlayın
-                    width: 120.0, // Genişlik ayarı
+                    height: 80.0, // Resmin boyutunu ayarlayın
+                    width: 80.0, // Genişlik ayarı
                     fit: BoxFit.contain, // Resmin orantılı şekilde görünmesini sağlar
                   ),
                 ),
@@ -69,23 +78,7 @@ class UserHomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent, // Şeffaf arka plan
         elevation: 0, // Gölge yok
-        actions: [
-          IconButton(
-            icon: Image.asset(
-              'assets/sepet.png',
-              width: 50.0, // Sepet simgesinin genişliği artırıldı
-              height: 50.0, // Sepet simgesinin yüksekliği artırıldı
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const UserReserve(), // Uygun ekran ile güncelle
-                ),
-              );
-            },
-          ),
-        ],
+
       ),
       body: Stack(
         children: [
@@ -117,7 +110,7 @@ class UserHomeScreen extends StatelessWidget {
           Column(
             children: [
               // AppBar'dan sonraki boşluk
-              SizedBox(height: kToolbarHeight + 65), // AppBar yüksekliği + 65 piksel
+              SizedBox(height: kToolbarHeight + 85), // AppBar yüksekliği + 65 piksel
 
               // Banner bölümü
               Container(

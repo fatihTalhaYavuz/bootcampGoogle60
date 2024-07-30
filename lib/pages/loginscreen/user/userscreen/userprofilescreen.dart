@@ -72,7 +72,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: kToolbarHeight + 20), // AppBar yüksekliği + 20 piksel boşluk
+                SizedBox(height: kToolbarHeight + 50), // AppBar yüksekliği + 20 piksel boşluk
                 Center(
                   child: Column(
                     children: [

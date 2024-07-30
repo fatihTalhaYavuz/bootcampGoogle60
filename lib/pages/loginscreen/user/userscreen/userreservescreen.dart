@@ -28,22 +28,13 @@ class _UserReserveState extends State<UserReserve> {
           },
         ),
         title: Align(
-          alignment: Alignment(0.0, 0), // Ortalanmış
+          alignment: Alignment(-0.2, 0), // Ortalanmış
           child: Image.asset(
             'assets/allgotur.png',
-            height: 130.0, // Logo boyutu
+            height: 100.0, // Logo boyutu
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Image.asset(
-              'assets/sepet.png',
-              height: 50.0,
-              width: 50.0,
-            ),
-          ),
-        ],
+
       ),
       body: Stack(
         children: [
@@ -80,37 +71,8 @@ class _UserReserveState extends State<UserReserve> {
                 SizedBox(height: kToolbarHeight + 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'İstanbul',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            color: Colors.green,
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          value: selectedLocation,
-                          icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedLocation = newValue!;
-                            });
-                          },
-                          items: locations.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 80.0),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.lightGreen[100],
