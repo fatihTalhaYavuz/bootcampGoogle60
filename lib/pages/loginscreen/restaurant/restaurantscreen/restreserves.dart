@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_bootcamp_60/app_open_screen.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
 class RestReserve extends StatefulWidget {
   const RestReserve({super.key});
@@ -9,7 +13,88 @@ class RestReserve extends StatefulWidget {
 
 class _RestReserveState extends State<RestReserve> {
   bool showCart = true; // Başlangıç durumu sepeti gösterir
+  List<DocumentSnapshot> foods = [];
+  String selectedLocation = ''; // Kullanıcının ilçesi
+  bool isLoading = true; // Yüklenme durumunu göstermek için
+  String userUID = ''; // Kullanıcı UID'si
 
+  @override
+  void initState() {
+    super.initState();
+    _getUserUID();
+  }
+
+  Future<void> _getUserUID() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        setState(() {
+          userUID = user.uid;
+        });
+        print("DENEME"+ userUID);
+        await _fetchUserLocation(); // Kullanıcının lokasyonunu çek
+      } else {
+        // Kullanıcı mevcut değilse, kullanıcıyı giriş yapmaya yönlendir
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const AppOpenScreen() // Giriş ekranına yönlendir
+          ),
+        );
+      }
+    } catch (e) {
+      print('Kullanıcı UID alınırken hata oluştu: $e');
+    }
+  }
+
+  Future<void> _fetchUserLocation() async {
+    try {
+      // Tüm lokasyonları çek
+      List<String> districts = ['Adalar', 'Arnavutköy', 'Üsküdar']; // Örnek lokasyonlar
+
+      for (String district in Districts.istanbulDistricts) {
+        DocumentSnapshot? userDoc = await FirebaseFirestore.instance
+            .collection('restaurants')
+            .doc(district)
+            .collection('details')
+            .doc(userUID)
+            .get();
+
+        if (userDoc.exists) {
+          setState(() {
+            selectedLocation = district; // Kullanıcının bulunduğu lokasyonu ayarla
+          });
+          break; // Kullanıcı bulundu, döngüden çık
+        }
+      }
+      await _fetchFoods();
+    } catch (e) {
+      print('Kullanıcının lokasyonu alınırken hata oluştu: $e');
+    }
+  }
+
+  Future<void> _fetchFoods() async {
+    if (selectedLocation.isEmpty) return; // İlçe henüz ayarlanmamışsa veriyi çekme
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw Exception('Kullanıcı giriş yapmamış.');
+      }
+      final userUID = user.uid;
+      final snapshot = await FirebaseFirestore.instance
+          .collection('restaurants')
+          .doc(selectedLocation)
+          .collection('details')
+          .doc(userUID)
+          .collection('yemekler')
+          .get();
+      setState(() {
+        foods = snapshot.docs;
+      });
+    } catch (e) {
+      print('Veri çekme hatası: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +112,9 @@ class _RestReserveState extends State<RestReserve> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-
       ),
-      body: Stack(
+      body:
+      Stack(
         children: [
           // Üst daire
           Positioned(
@@ -61,7 +146,6 @@ class _RestReserveState extends State<RestReserve> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-
                 SizedBox(height: kToolbarHeight + 50.0),
                 Container(
                   decoration: BoxDecoration(
@@ -106,139 +190,135 @@ class _RestReserveState extends State<RestReserve> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
                 Expanded(
                   child: showCart ? buildCartContent() : buildReservationsContent(), // İçeriği göster
                 ),
               ],
             ),
           ),
-          Positioned(
-            bottom: 20.0,
-            right: 20.0,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Yeni öğe ekle
-              },
-              child: Icon(Icons.add),
-            ),
-          ),
+
         ],
       ),
     );
   }
 
   Widget buildCartContent() {
-    return ListView(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0),
-          padding: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(color: Colors.grey),
-          ),
-          child: Row(
-            children: [
-              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
-              SizedBox(width: 10.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
-                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Öğeyi düzenle
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
-                  ),
-                  SizedBox(height: 5.0),
-                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
+    return foods.isEmpty
+        ? Center(child: Text('Sepetiniz boş.'))
+        : ListView.builder(
+      itemCount: foods.length,
+      itemBuilder: (context, index) {
+        var food = foods[index];
+        return FoodCard(
+          food: food,
+          onQuantityChanged: (newQuantity) {
+            _updateFoodQuantity(food.id, newQuantity);
+          },
+          onDelete: () {
+            _deleteFood(food.id);
+          },
+        );
+      },
     );
   }
 
   Widget buildReservationsContent() {
-    return ListView(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0),
-          padding: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(color: Colors.grey),
-          ),
-          child: Row(
-            children: [
-              Image.asset('assets/taking_food.png', width: 80.0, height: 80.0),
-              SizedBox(width: 10.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Taking Food', style: TextStyle(fontSize: 18.0)),
-                    Text('20 adet', style: TextStyle(fontSize: 16.0)),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Öğeyi düzenle
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: Text('DÜZENLE', style: TextStyle(color: Colors.white)),
-                  ),
-                  SizedBox(height: 5.0),
-                  Text('22.00-22.30', style: TextStyle(fontSize: 16.0)),
-                ],
-              ),
-            ],
-          ),
-        ),
-        // Daha fazla rezervasyon öğesi buraya ekle
-      ],
-    );
+    // Örnek rezervasyon içeriği
+    return Center(child: Text('Rezervasyonlarınız buraya gelecek.'));
+  }
+
+  void _updateFoodQuantity(String docId, String newQuantity) {
+    FirebaseFirestore.instance
+        .collection('restaurants')
+        .doc(selectedLocation)
+        .collection('details')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('yemekler')
+        .doc(docId)
+        .update({'yemekMiktari': newQuantity});
+  }
+
+  void _deleteFood(String docId) {
+    FirebaseFirestore.instance
+        .collection('restaurants')
+        .doc(selectedLocation)
+        .collection('details')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('yemekler')
+        .doc(docId)
+        .delete()
+        .then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Yemek başarıyla silindi.'))
+      );
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Yemek silinirken hata oluştu: $error'))
+      );
+    });
   }
 }
 
-class HalfCirclePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.orange
-      ..style = PaintingStyle.fill;
+class FoodCard extends StatelessWidget {
+  final DocumentSnapshot food;
+  final Function(String) onQuantityChanged;
+  final VoidCallback onDelete;
 
-    Path path = Path()
-      ..moveTo(0, size.height)
-      ..quadraticBezierTo(size.width / 2, -size.height, size.width, size.height)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
+  const FoodCard({
+    required this.food,
+    required this.onQuantityChanged,
+    required this.onDelete,
+    super.key,
+  });
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  Widget build(BuildContext context) {
+    TextEditingController quantityController = TextEditingController(text: food['yemekMiktari']);
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Row(
+        children: [
+          Image.network(food['imageUrl'], width: 80.0, height: 80.0),
+          SizedBox(width: 10.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(food['ilanBasligi'], style: TextStyle(fontSize: 18.0)),
+                Text(food['yemekTuru'], style: TextStyle(fontSize: 16.0)),
+                Text(food['adres'], style: TextStyle(fontSize: 14.0)),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                width: 60,
+                child: TextField(
+                  controller: quantityController,
+                  decoration: InputDecoration(
+                    labelText: 'Miktar',
+                  ),
+                  onSubmitted: onQuantityChanged, // Burada onSubmitted kullanılıyor
+                ),
+              ),
+              ElevatedButton(
+                onPressed: onDelete,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                child: Text('SİL', style: TextStyle(color: Colors.white)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

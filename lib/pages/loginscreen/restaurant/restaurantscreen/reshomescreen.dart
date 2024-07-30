@@ -235,6 +235,14 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
               Colors.grey[200]!,
               Colors.white,
                   () {
+                // Burada geçiş işlevini ekliyoruz
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RestReserve(),
+                  ),
+                );
+
                 // Burada ürün detaylarına gitme işlevi ekleyebilirsiniz
               },
             );
