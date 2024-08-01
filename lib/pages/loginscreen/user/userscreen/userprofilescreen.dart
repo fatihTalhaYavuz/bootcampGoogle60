@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/app_open_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userhomescreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreservescreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -12,10 +15,57 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   bool isEditing = false; // Düzenleme modunu kontrol eder
-  final TextEditingController emailController = TextEditingController(text: 'all.gotur@gmail.com');
-  final TextEditingController nameController = TextEditingController(text: 'ALİ GÖTÜR');
-  final TextEditingController phoneController = TextEditingController(text: '0 505 505 55 00');
-  final TextEditingController addressController = TextEditingController(text: 'Kadıköy');
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+
+      DocumentSnapshot? detailsDoc = await _getRestaurantDetails(uid);
+
+      if (detailsDoc != null && detailsDoc.exists) {
+        setState(() {
+          emailController.text = detailsDoc['email'];
+          nameController.text = detailsDoc['name'];
+          phoneController.text = detailsDoc['phone'];
+          addressController.text = detailsDoc['district'];
+        });
+      }
+    }
+  }
+
+  Future<DocumentSnapshot?> _getRestaurantDetails(String uid) async {
+
+    DocumentSnapshot doc = await _firestore
+        .collection('users')
+        .doc(uid)
+        .get();
+
+    return doc;
+  }
+  Future<void> _signOut() async {
+    await _auth.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AppOpenScreen()),
+    );
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +145,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       const SizedBox(height: 30.0), // Butonlar arasındaki boşluk artırıldı
                       ElevatedButton(
                         onPressed: () {
+                          _signOut();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const AppOpenScreen()),

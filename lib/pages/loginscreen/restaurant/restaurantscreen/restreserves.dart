@@ -227,7 +227,7 @@ class _RestReserveState extends State<RestReserve> {
     return Center(child: Text('Rezervasyonlarınız buraya gelecek.'));
   }
 
-  void _updateFoodQuantity(String docId, String newQuantity) {
+  void _updateFoodQuantity(String docId, int newQuantity) {
     FirebaseFirestore.instance
         .collection('restaurants')
         .doc(selectedLocation)
@@ -261,7 +261,7 @@ class _RestReserveState extends State<RestReserve> {
 
 class FoodCard extends StatelessWidget {
   final DocumentSnapshot food;
-  final Function(String) onQuantityChanged;
+  final Function(int) onQuantityChanged;
   final VoidCallback onDelete;
 
   const FoodCard({
@@ -273,7 +273,7 @@ class FoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController(text: food['yemekMiktari']);
+    TextEditingController quantityController = TextEditingController(text: food['yemekMiktari'].toString());
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       padding: EdgeInsets.all(10.0),
@@ -305,7 +305,13 @@ class FoodCard extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Miktar',
                   ),
-                  onSubmitted: onQuantityChanged, // Burada onSubmitted kullanılıyor
+                  keyboardType: TextInputType.number, // Sayısal giriş için klavye tipi
+                  onSubmitted: (value) {
+                    int? newQuantity = int.tryParse(value); // Girdiyi int'e çevir
+                    if (newQuantity != null) {
+                      onQuantityChanged(newQuantity); // Girdi geçerliyse int olarak işle
+                    }
+                  },
                 ),
               ),
               ElevatedButton(

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +28,7 @@ class _ResAddScreenState extends State<ResAddScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _mapLinkController = TextEditingController();
   String _mealType = 'Sandviç';
-  String _mealAmount = '1';
+  int _mealAmount = 1;
   File? _imageFile;
 
 
@@ -209,17 +211,16 @@ class _ResAddScreenState extends State<ResAddScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
-                  DropdownButtonFormField<String>(
+                  SizedBox(height: 10.0),DropdownButtonFormField<int>(
                     value: _mealAmount,
-                    items: <String>['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
+                    items: <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        .map<DropdownMenuItem<int>>((int value) {
+                      return DropdownMenuItem<int>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value.toString()), // `value` int olduğundan `Text(value)` yerine `Text(value.toString())` kullanmalısınız.
                       );
                     }).toList(),
-                    onChanged: (String? newValue) {
+                    onChanged: (int? newValue) {
                       setState(() {
                         _mealAmount = newValue!;
                       });

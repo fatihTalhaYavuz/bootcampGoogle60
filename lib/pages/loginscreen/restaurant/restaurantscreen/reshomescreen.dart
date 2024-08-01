@@ -253,7 +253,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
   }
 
   Widget _buildProductItem(BuildContext context, String logoPath, String exp,
-      String quantity, String type, String baslik, String time, Color logoBgColor,
+      int quantity, String type, String baslik, String time, Color logoBgColor,
       Color cardBgColor, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
@@ -289,7 +289,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(time, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
-                Text(quantity, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
+                Text(quantity.toString(), style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
               ],
             ),
           ],
