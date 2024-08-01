@@ -77,33 +77,41 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 100.0,
-        title: Center(
-          child: Image.asset(
-            'assets/allgotur.png',
-            height: 90.0,
-            width: 90.0,
-            fit: BoxFit.contain,
-          ),
+        title: Row(
+          children: [
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  margin: const EdgeInsets.only(left: 90.0),
+                  child: Image.asset(
+                    'assets/allgotur.png',
+                    height: 80.0,
+                    width: 80.0,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Image.asset(
+                'assets/zerogoal.png',
+                width: 50.0,
+                height: 50.0,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RestReserve(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: Image.asset(
-              'assets/zerogoal.png',
-              width: 50.0,
-              height: 50.0,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RestReserve(),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -133,7 +141,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
           ),
           Column(
             children: [
-              SizedBox(height: kToolbarHeight + 95),
+              SizedBox(height: kToolbarHeight + 85),
               Container(
                 height: 200.0,
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -145,6 +153,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 20.0),
               Expanded(
                 child: selectedLocation.isNotEmpty ? _buildProductList() : Center(child: Text('Lokasyon yükleniyor...')),
               ),
@@ -222,6 +231,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
         }
 
         return ListView(
+          padding: EdgeInsets.zero,
           children: snapshot.data!.docs.map((doc) {
             var data = doc.data() as Map<String, dynamic>;
             return _buildProductItem(
@@ -235,15 +245,12 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
               Colors.grey[200]!,
               Colors.white,
                   () {
-                // Burada geçiş işlevini ekliyoruz
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const RestReserve(),
                   ),
                 );
-
-                // Burada ürün detaylarına gitme işlevi ekleyebilirsiniz
               },
             );
           }).toList(),
@@ -251,7 +258,6 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
       },
     );
   }
-
   Widget _buildProductItem(BuildContext context, String logoPath, String exp,
       int quantity, String type, String baslik, String time, Color logoBgColor,
       Color cardBgColor, VoidCallback onTap) {
