@@ -7,7 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_bootcamp_60/districts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:animated_text_kit/animated_text_kit.dart'; // AnimatedTextKit paketi
+import 'package:animated_text_kit/animated_text_kit.dart';
+
+import '../../../../chatbot_screen.dart'; // AnimatedTextKit paketi
 
 class ResHomeScreen extends StatefulWidget {
   const ResHomeScreen({super.key});
@@ -196,7 +198,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RestReserve(),
+                      builder: (context) => const ChatBotScreen(),
                     ),
                   );
                 },
