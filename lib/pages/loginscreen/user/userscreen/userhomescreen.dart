@@ -7,6 +7,7 @@ import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userreserve
 import 'package:google_bootcamp_60/districts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UserHomeScreen extends StatefulWidget {
   const UserHomeScreen({super.key});
@@ -20,6 +21,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Map<String, dynamic>> products = [];
+  final PageController _controller = PageController();
 
   @override
   void initState() {
@@ -175,172 +177,224 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 100.0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Container(
-                width: 150.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'İstanbul',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.green,
-                      ),
-                    ),
-                    DropdownButton<String>(
-                      value: _selectedDistrict,
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _selectedDistrict = newValue!;
-                          _loadProducts(); // Yeni ilçe seçildiğinde ürünleri yeniden yükle
-                        });
-                      },
-                      items: Districts.istanbulDistricts
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
+
+        backgroundColor: Color(0xFFF8F8FF),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          toolbarHeight: 100.0,
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 5.0),
                 child: Container(
-                  margin: const EdgeInsets.only(right: 60.0),
-                  child: Image.asset(
-                    'assets/allgotur.png',
-                    height: 80.0,
-                    width: 80.0,
-                    fit: BoxFit.contain,
+                  width: 150.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'İstanbul',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width, // Ekran genişliği kadar
+                        ),
+                        child: DropdownButton<String>(
+                          value: _selectedDistrict,
+                          icon: Icon(Icons.arrow_drop_down, color: Colors.green),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedDistrict = newValue!;
+                              _loadProducts(); // Yeni ilçe seçildiğinde ürünleri yeniden yükle
+                            });
+                          },
+                          items: Districts.istanbulDistricts
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value,softWrap: false,
+                                overflow: TextOverflow.ellipsis,),
+                            );
+                          }).toList(),
+                          style: TextStyle(color: Colors.black),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 50.0),
+                    child: Image.asset(
+                      'assets/allgotur.png',
+                      height: 1000.0,
+                      width: 1000.0,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+
+              ),
+              IconButton(
+                icon: Image.asset(
+                  'assets/zerogoal.png',
+                  width: 80.0,
+                  height: 80.0,
+                ),
+                onPressed: () {
+
+                },
+              ),
+
+            ],
+
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+
+        ),
+        body: Stack(
+          children: [
+            Positioned(
+              top: -150,
+              left: -150,
+              child: Container(
+                width: 400,
+                height: 400,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.green.withOpacity(0.3),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: -180,
+              right: -180,
+              child: Container(
+                width: 400,
+                height: 400,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.green.withOpacity(0.3),
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                SizedBox(height: kToolbarHeight + 85),
+                Container(
+
+                  height: 220.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    boxShadow: [BoxShadow(color: Colors.blueGrey, blurRadius: 5)],
+
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: PageView(
+                    controller: _controller,
+                    children: [
+                      Image.asset('assets/banner4.gif', fit: BoxFit.cover),
+                      Image.asset('assets/banner5.gif', fit: BoxFit.cover),
+                      Image.asset('assets/banner2.png', fit: BoxFit.cover),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 3,
+                  effect: WormEffect(
+                    dotHeight: 8,
+                    dotWidth: 8,
+                    spacing: 16,
+                    activeDotColor: Colors.blue,
+                    dotColor: Colors.grey,
+                  ),
+
+                ),
+
+                SizedBox(height: 5.0),
+
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return _buildProductItem(
+                        context,
+                        products[index]['imageUrl'],
+                        products[index]['restaurantName'],
+                        products[index]['aciklama'],
+                        products[index]['yemekMiktari'],
+                        Colors.orangeAccent,
+                        const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2),
+                            () => _addToCart(products[index]),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: -150,
-            left: -150,
-            child: Container(
-              width: 400,
-              height: 400,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.green.withOpacity(0.3),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -180,
-            right: -150,
-            child: Container(
-              width: 400,
-              height: 400,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.green.withOpacity(0.3),
-              ),
-            ),
-          ),
-          Column(
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 10.0,
+          color: Color.fromARGB(255, 255, 255, 255),
+          elevation: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: kToolbarHeight + 85),
-              Container(
-                height: 200.0,
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: PageView(
-                  children: [
-                    Image.asset('assets/banner3.png', fit: BoxFit.cover),
-                    Image.asset('assets/banner1.png', fit: BoxFit.cover),
-                    Image.asset('assets/banner2.png', fit: BoxFit.cover),
-                  ],
-                ),
+              IconButton(
+                icon: Image.asset('assets/home.png', width: 90.0, height: 90.0),
+                onPressed: () {
+                  // Ana sayfa buton fonksiyonu
+                },
               ),
-              SizedBox(height: 20.0),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return _buildProductItem(
-                      context,
-                      products[index]['imageUrl'],
-                      products[index]['restaurantName'],
-                      products[index]['aciklama'],
-                      products[index]['yemekMiktari'],
-                      Colors.green,
-                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2),
-                          () => _addToCart(products[index]),
-                    );
-                  },
-                ),
+              SizedBox(width: 90.0),
+              IconButton(
+                icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UserProfileScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255),
-        elevation: 0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0),
-              onPressed: () {
-                // Ana sayfa buton fonksiyonu
-              },
-            ),
-            SizedBox(width: 90.0),
-            IconButton(
-              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UserProfileScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const UserReserve(),
-            ),
-          );
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        child: Image.asset('assets/shopping.png', width: 130.0, height: 130.0),
-      ),
-    );
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const UserReserve(),
+              ),
+            );
+          },
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Image.asset('assets/shopping.png', width: 200.0, height: 200.0),
+        ),
+      );
+
   }
 
   Widget _buildProductItem(
@@ -358,7 +412,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: cardBgColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Row(
@@ -396,4 +450,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
+

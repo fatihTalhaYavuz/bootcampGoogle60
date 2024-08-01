@@ -6,6 +6,7 @@ import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_bootcamp_60/districts.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ResHomeScreen extends StatefulWidget {
   const ResHomeScreen({super.key});
@@ -17,6 +18,7 @@ class ResHomeScreen extends StatefulWidget {
 class _ResHomeScreenState extends State<ResHomeScreen> {
   String userUID = ''; // Kullanıcı UID'si
   String selectedLocation = ''; // Dinamik lokasyon
+  final PageController _controller = PageController();//kaydırma
 
   @override
   void initState() {
@@ -86,8 +88,8 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                   margin: const EdgeInsets.only(left: 90.0),
                   child: Image.asset(
                     'assets/allgotur.png',
-                    height: 80.0,
-                    width: 80.0,
+                    height: 90.0,
+                    width: 90.0,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -96,8 +98,8 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
             IconButton(
               icon: Image.asset(
                 'assets/zerogoal.png',
-                width: 50.0,
-                height: 50.0,
+                width: 90.0,
+                height: 90.0,
               ),
               onPressed: () {
                 Navigator.push(
@@ -143,19 +145,33 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
             children: [
               SizedBox(height: kToolbarHeight + 85),
               Container(
-                height: 200.0,
+                height: 220.0,
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: [BoxShadow(color: Colors.blueGrey, blurRadius: 5)],
+
+                ),
+                clipBehavior: Clip.antiAlias,
                 child: PageView(
+                  controller: _controller,
                   children: [
-                    Image.asset('assets/banner1.png', fit: BoxFit.cover),
+                    Image.asset('assets/banner5.gif', fit: BoxFit.cover),
+                    Image.asset('assets/banner4.gif', fit: BoxFit.cover),
                     Image.asset('assets/banner2.png', fit: BoxFit.cover),
-                    Image.asset('assets/banner3.png', fit: BoxFit.cover),
                   ],
                 ),
-              ),
-              SizedBox(height: 20.0),
-              Expanded(
-                child: selectedLocation.isNotEmpty ? _buildProductList() : Center(child: Text('Lokasyon yükleniyor...')),
+              ), SizedBox(height: 20),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 3,
+                effect: WormEffect(
+                  dotHeight: 8,
+                  dotWidth: 8,
+                  spacing: 16,
+                  activeDotColor: Colors.blue,
+                  dotColor: Colors.grey,
+                ),
               ),
             ],
           ),
@@ -302,5 +318,10 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
         ),
       ),
     );
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

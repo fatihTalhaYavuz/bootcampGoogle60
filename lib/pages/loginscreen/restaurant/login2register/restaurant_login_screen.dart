@@ -155,7 +155,7 @@ class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/logo.png',
+                      'assets/allgotur.png',
                       height: 100.0,
                       width: 100.0,
                     ),

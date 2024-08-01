@@ -132,8 +132,8 @@ class _ResAddScreenState extends State<ResAddScreen> {
           IconButton(
             icon: Image.asset(
               'assets/zerogoal.png',
-              width: 50.0, // Sepet ikonunun genişliği arttırıldı
-              height: 50.0, // Sepet ikonunun yüksekliği arttırıldı
+              width: 100.0, // Sepet ikonunun genişliği arttırıldı
+              height: 100.0, // Sepet ikonunun yüksekliği arttırıldı
             ),
             onPressed: () {
               // Sepet butonu fonksiyonu

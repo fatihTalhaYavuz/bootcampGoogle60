@@ -127,10 +127,12 @@ class _ResProfileState extends State<ResProfile> {
                 SizedBox(height: kToolbarHeight + 20),
                 Center(
                   child: Column(
+
                     children: [
+                      SizedBox(height: 20),
                       Image.asset(
                         'assets/taking_food.png',
-                        height: 100.0,
+                        height: 200.0,
                       ),
                       const SizedBox(height: 20.0),
                       Text(

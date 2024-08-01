@@ -130,7 +130,7 @@ class UserLoginScreen extends StatefulWidget {
                   children: [
                     // Logo
                     Image.asset(
-                      'assets/logo.png', // Logo dosyasının yolu
+                      'assets/allgotur.png', // Logo dosyasının yolu
                       height: 100.0,
                       width: 100.0,
                     ),

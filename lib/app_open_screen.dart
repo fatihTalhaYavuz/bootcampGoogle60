@@ -50,26 +50,33 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Eski logo
-                Image.asset(
-                  'assets/logo.png', // Eski logo dosyasının yolu
-                  height: 180.0,
-                  fit: BoxFit.fitHeight,
+                Container(
+
+
+
+                  child: Image.asset(
+                    'assets/logo.png', // Eski logo dosyasının yolu
+
+                    height: 300.0,
+                    fit: BoxFit.fitHeight,
+                  ),
+
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 5.0),
                 // Yeni logo ve hoş geldiniz mesajı
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Yeni logo
                     Image.asset(
-                      'assets/alg.png', // Yeni logo dosyasının yolu
+                      'assets/allgoture.png', // Yeni logo dosyasının yolu
                       height: 50.0,
                       fit: BoxFit.fitHeight,
                     ),
                     const SizedBox(width: 0.0), // Logo ile metin arasında boşluk bırakır
                     // Hoş geldin mesajı
                     const Text(
-                      '\'e Hoş Geldin!',
+                      ' Hoş Geldin!',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
