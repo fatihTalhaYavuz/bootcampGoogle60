@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_bootcamp_60/colors.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/userhomescreen.dart';
-import 'pages/loginscreen/user/login1register/user_login_screen.dart';
-import 'pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/reshomescreen.dart';
 
 class AppOpenScreen extends StatefulWidget {
   const AppOpenScreen({super.key});
@@ -49,20 +49,33 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo
+                // Eski logo
                 Image.asset(
-                  'assets/logo.png', // Logo dosyasının yolu
-                  height: 100.0,
-                  width: 100.0,
+                  'assets/logo.png', // Eski logo dosyasının yolu
+                  height: 180.0,
+                  fit: BoxFit.fitHeight,
                 ),
                 const SizedBox(height: 20.0),
-                // Hoş geldin mesajı
-                const Text(
-                  'All Götür\'e Hoş Geldin!',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                // Yeni logo ve hoş geldiniz mesajı
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Yeni logo
+                    Image.asset(
+                      'assets/alg.png', // Yeni logo dosyasının yolu
+                      height: 50.0,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    const SizedBox(width: 0.0), // Logo ile metin arasında boşluk bırakır
+                    // Hoş geldin mesajı
+                    const Text(
+                      '\'e Hoş Geldin!',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10.0),
                 const Text(
@@ -89,10 +102,10 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                       },
                       child: const Text(
                         'Kullanıcı girişi',
-                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                        style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonrenkana, // Buton arka plan rengini sarı yapar
+                        backgroundColor: buttonrenkana,
                       ),
                     ),
                     const SizedBox(width: 20.0),
@@ -108,10 +121,10 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                       },
                       child: const Text(
                         'Restoran girişi',
-                        style: TextStyle(color: Colors.black), // Metin rengini mavi yapar
+                        style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonrenkana, // Buton arka plan rengini turuncu yapar
+                        backgroundColor: buttonrenkana,
                       ),
                     ),
                   ],

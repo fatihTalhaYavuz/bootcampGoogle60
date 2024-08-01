@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.google_bootcamp_60">
    <application
-        android:label="google_bootcamp_60"
+        android:label="All Götür"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
