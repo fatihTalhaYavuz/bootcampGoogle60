@@ -29,6 +29,7 @@ Restoranların gün sonundaki yemek stoklarına göre yaptıkları bağışları
 - Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
 - Sürdürülebilir bir yaşam için açlığa son vermeye katkıda bulunmak isteyen restoranlar.
 
+
 # SPRINT 1
 
 Sprint içinde tamamlanması tahmin edilen puan: 131
@@ -57,6 +58,7 @@ Sprint Review:
 - Veritabanı olarak Firebase kullanılmasına karar verilmiştir
 - Uygulamanın sayfa tasarımları detaylı olarak oluşturulmuştur.
 - Genel olarak sorunsuz bir sprint süreci geçirildi.
+  Katılımcılar: İnci Temizel, Fatih Talha Yavuzaslanoğlu, Ferat Taş, İpek Gültekin
 
 Sprint Retrospective:
 - İkinci sprint başlangıcı ile beraber temel tasarımlarla beraber firebase bağlantılarının ve database planlamasının oluşturulmasına karar verilmiştir.
@@ -89,7 +91,8 @@ Sprint Notları:
 
 Sprint Review:
 - Genel olarak sorunsuz bir sprint süreci geçirildi.
-
+  Katılımcılar: İnci Temizel, Fatih Talha Yavuzaslanoğlu, Ferat Taş, İpek Gültekin
+  
 Sprint Retrospective:
 - Üçüncü sprint başlangıcı ile beraber temel tasarımların flutter ile kodlanması bitirilip firebase bağlantılarının tamamlanmasına ve projenin tamamlanarak testlerin başlamasına karar verilmiştir.
 
@@ -100,7 +103,7 @@ Daily scrum toplantı not örnekleri:
 
 # SPRINT 3
 
-Sprint içinde tamamlanması tahmin edilen puan: 200
+Sprint içinde tamamlanması tahmin edilen puan: 216
 
 Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 547 puanlık backlog bulunmaktadır.
 Üçüncü sprint için 216 puanlık hedef oluşturulmuştur ve hedefe ulaşılmıştır. Toplam 547 puanlık backlog tamamlanmıştır.
@@ -112,16 +115,23 @@ Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına ka
 Sprint board screenshot:
 ![image](https://github.com/user-attachments/assets/df8f5f15-ceba-4c94-81c0-b464673b8f48)
 
-
 Sprint Notları:
 - Sprint sorunsuz ilerlemiştir.
-- Tasarım için Figmada belirlenen tasarımlar fluttera dökülmüştür.
-- Giriş sayfalarında firebase bağlantıları yapılmıştır.
+- Uygulamanın özellikleri tamamlanmıştır.
+- Gemini API entegre edilmiştir.
 
 Sprint Review:
-- Genel olarak sorunsuz bir sprint süreci geçirildi.
-
+- Genel olarak sorunsuz bir sprint süreci geçirildi ve ürün tamamlandı.
+- Firebase authentication ile kullanıcı doğrulaması yapıldı.
+- Firestore ile users ve restaurants ayrımı yapıldı.
+- Firestore ile users ve restaurants verileri ayrıştırıldı kullanıcının giriş yaptığı zaman ilgili sayfaya yönlendirilmesi sağlandı.
+- Firestore ile kullanıcıların restaurants ile rezerve işlemlerinin yapılması sağlandı.
+- Restaurants'ın ilçe bazlı kayıtlarının oluşturulması firestore'a kaydedilmesi ve bu oluşturulan kaydın users'ta ilçe seçimine göre görüntülenip rezervasyon yapıldığında ilgili restorana kaydın yapılması sağlandı.
+- Gemini API ile chatbot yapıldı. Kullanıcılar Sürdürülebilir Kalkınma Amaçları(SKA) hakkında bilmedikleri bilgileri giriş yapma şartı olmaksızın farkındalık kazanmak amacıyla sorabilecekler.
+  Katılımcılar: İnci Temizel, Fatih Talha Yavuzaslanoğlu, Ferat Taş, İpek Gültekin
+  
 Sprint Retrospective:
+- Yarışmanın başında belirlenen proje hedefleri tamamlandı.
 
 Daily scrum toplantı not örnekleri:
 
