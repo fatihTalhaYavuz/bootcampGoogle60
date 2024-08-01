@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_bootcamp_60/districts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:animated_text_kit/animated_text_kit.dart'; // AnimatedTextKit paketi
 
 class ResHomeScreen extends StatefulWidget {
   const ResHomeScreen({super.key});
@@ -18,7 +19,8 @@ class ResHomeScreen extends StatefulWidget {
 class _ResHomeScreenState extends State<ResHomeScreen> {
   String userUID = ''; // Kullanıcı UID'si
   String selectedLocation = ''; // Dinamik lokasyon
-  final PageController _controller = PageController();//kaydırma
+  final PageController _controller = PageController(); // Kaydırma
+  bool _isTextVisible = true; // Metin görünürlüğü kontrolü
 
   @override
   void initState() {
@@ -39,7 +41,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const AppOpenScreen() // Giriş ekranına yönlendir
+            builder: (context) => const AppOpenScreen(), // Giriş ekranına yönlendir
           ),
         );
       }
@@ -150,7 +152,6 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   boxShadow: [BoxShadow(color: Colors.blueGrey, blurRadius: 5)],
-
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: PageView(
@@ -161,7 +162,8 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                     Image.asset('assets/banner2.png', fit: BoxFit.cover),
                   ],
                 ),
-              ), SizedBox(height: 20),
+              ),
+              SizedBox(height: 20),
               SmoothPageIndicator(
                 controller: _controller,
                 count: 3,
@@ -174,6 +176,63 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                 ),
               ),
             ],
+          ),
+          Positioned(
+            bottom: 318,
+            left: 5,
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.transparent,
+                  width: 0,
+                ),
+              ),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RestReserve(),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/chat.gif',
+                  width: 120,
+                  height: 120,
+                ),
+                heroTag: 'chatBotScreen',
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 318, // Adjust this value based on your design
+            left: 120, // Adjust this value based on your design
+            child: AnimatedOpacity(
+              opacity: _isTextVisible ? 1.0 : 0.0,
+              duration: Duration(seconds: 30), // Animation duration
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: TypewriterAnimatedTextKit(
+                  text: [
+                    'Bana sürdürülebilir yaşam \nhedefleri hakkında soru sor...',
+                  ],
+                  textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
+                  speed: Duration(milliseconds: 100), // Yazma hızı
+                  repeatForever: true,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -274,6 +333,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
       },
     );
   }
+
   Widget _buildProductItem(BuildContext context, String logoPath, String exp,
       int quantity, String type, String baslik, String time, Color logoBgColor,
       Color cardBgColor, VoidCallback onTap) {
@@ -320,6 +380,7 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
     );
   }
 
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
