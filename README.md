@@ -1,4 +1,7 @@
-![image](https://github.com/user-attachments/assets/06852c80-1755-462e-8d5d-256f72288d49)# Takım İsmi
+
+![allgotur](https://github.com/user-attachments/assets/b13b275e-fd16-4b4d-bc7e-9ab95c6932c8)
+# Takım İsmi
+
 ###### Flutter Grup 60
 
 # Takım Üyeleri
