@@ -33,6 +33,12 @@ dependencies:
   firebase_core: ^2.0.0
   firebase_auth: ^4.4.1
   cloud_firestore: ^4.9.0
+  firebase_storage: ^11.7.7
+  image_picker: ^0.8.5+3
+  smooth_page_indicator: ^1.2.0+3
+  flutter_gemini: ^2.0.4
+  http: ^0.13.3
+  animated_text_kit: ^4.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,6 +47,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/ikon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "path/to/image.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -80,6 +99,12 @@ flutter:
     - assets/remove.png
     - assets/bagis.png
     - assets/alg.png
+    - assets/ikon.png
+    - assets/banner4.gif
+    - assets/banner5.gif
+    - assets/allgoture.png
+    - assets/chat.gif
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

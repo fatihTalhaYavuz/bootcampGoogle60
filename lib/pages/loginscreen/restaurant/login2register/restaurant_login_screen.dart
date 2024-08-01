@@ -5,6 +5,7 @@ import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/resregister.dart'; // Kayıt ekranı dosyasını import ettik
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_bootcamp_60/districts.dart';
 
 class RestaurantLoginScreen extends StatefulWidget {
   const RestaurantLoginScreen({super.key});
@@ -29,6 +30,7 @@ class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
 
       if (user != null) {
         bool restaurantExists = await _checkIfRestaurantExists(user.uid);
+
         if (restaurantExists) {
           Navigator.pushReplacement(
             context,
@@ -53,10 +55,45 @@ class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
 
   Future<bool> _checkIfRestaurantExists(String uid) async {
     final districts = [
-      'Adalar',
-      'Arnavutköy',
-
-      // Diğer ilçeleri buraya ekleyin
+      "Adalar",
+      "Arnavutköy",
+      "Ataşehir",
+      "Avcılar",
+      "Bağcılar",
+      "Bahçelievler",
+      "Bakırköy",
+      "Başakşehir",
+      "Bayrampaşa",
+      "Beşiktaş",
+      "Beykoz",
+      "Beylikdüzü",
+      "Beyoğlu",
+      "Büyükçekmece",
+      "Çatalca",
+      "Çekmeköy",
+      "Esenler",
+      "Esenyurt",
+      "Eyüpsultan",
+      "Fatih",
+      "Gaziosmanpaşa",
+      "Güngören",
+      "Kadıköy",
+      "Kağıthane",
+      "Kartal",
+      "Küçükçekmece",
+      "Maltepe",
+      "Pendik",
+      "Sancaktepe",
+      "Sarıyer",
+      "Silivri",
+      "Sultanbeyli",
+      "Sultangazi",
+      "Şile",
+      "Şişli",
+      "Tuzla",
+      "Ümraniye",
+      "Üsküdar",
+      "Zeytinburnu"
     ];
 
     for (String district in districts) {
@@ -119,7 +156,7 @@ class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/logo.png',
+                      'assets/allgotur.png',
                       height: 100.0,
                       width: 100.0,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_bootcamp_60/colors.dart';
+import 'package:google_bootcamp_60/pages/loginscreen/user/login1register/user_login_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/login2register/restaurant_login_screen.dart';
 import 'package:google_bootcamp_60/districts.dart';
 
@@ -72,7 +73,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                   children: [
                     // Logo
                     Image.asset(
-                      'assets/logo.png', // Logo dosyasının yolu
+                      'assets/allgotur.png', // Logo dosyasının yolu
                       height: 100.0,
                       width: 100.0,
                     ),
@@ -144,7 +145,7 @@ class _ResRegScreenState extends State<ResRegScreen> {
                     ),
                     const SizedBox(height: 20.0),
                     // İlçe Dropdown
-                    DropdownButton<String>(
+                    DropdownButtonFormField<String>(
                       value: selectedDistrict.isEmpty ? null : selectedDistrict,
                       hint: const Text('İlçe seçiniz'),
                       items: Districts.istanbulDistricts.map<DropdownMenuItem<String>>((String value) {
@@ -158,6 +159,13 @@ class _ResRegScreenState extends State<ResRegScreen> {
                           selectedDistrict = newValue!;
                         });
                       },
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: lgnback,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                    ),
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     // Kullanım ve Gizlilik Şartları

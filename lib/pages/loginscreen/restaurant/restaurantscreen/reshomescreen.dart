@@ -1,96 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/app_open_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resaddscreen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/resprofile.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/restaurant/restaurantscreen/restreserves.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product2.dart';
-import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_bootcamp_60/districts.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
-class ResHomeScreen extends StatelessWidget {
+import '../../../../chatbot_screen.dart'; // AnimatedTextKit paketi
+
+class ResHomeScreen extends StatefulWidget {
   const ResHomeScreen({super.key});
+
+  @override
+  _ResHomeScreenState createState() => _ResHomeScreenState();
+}
+
+class _ResHomeScreenState extends State<ResHomeScreen> {
+  String userUID = ''; // Kullanıcı UID'si
+  String selectedLocation = ''; // Dinamik lokasyon
+  final PageController _controller = PageController(); // Kaydırma
+  bool _isTextVisible = true; // Metin görünürlüğü kontrolü
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserUID();
+  }
+
+  Future<void> _getUserUID() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        setState(() {
+          userUID = user.uid;
+        });
+        await _fetchUserLocation(); // Kullanıcının lokasyonunu çek
+      } else {
+        // Kullanıcı mevcut değilse, kullanıcıyı giriş yapmaya yönlendir
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AppOpenScreen(), // Giriş ekranına yönlendir
+          ),
+        );
+      }
+    } catch (e) {
+      print('Kullanıcı UID alınırken hata oluştu: $e');
+    }
+  }
+
+  Future<void> _fetchUserLocation() async {
+    try {
+      // Tüm lokasyonları çek
+      List<String> districts = ['Adalar', 'Arnavutköy', 'Üsküdar']; // Örnek lokasyonlar
+
+      for (String district in Districts.istanbulDistricts) {
+        DocumentSnapshot? userDoc = await FirebaseFirestore.instance
+            .collection('restaurants')
+            .doc(district)
+            .collection('details')
+            .doc(userUID)
+            .get();
+
+        if (userDoc.exists) {
+          setState(() {
+            selectedLocation = district; // Kullanıcının bulunduğu lokasyonu ayarla
+          });
+          break; // Kullanıcı bulundu, döngüden çık
+        }
+      }
+    } catch (e) {
+      print('Kullanıcının lokasyonu alınırken hata oluştu: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar yüksekliği
+        automaticallyImplyLeading: false,
+        toolbarHeight: 100.0,
         title: Row(
           children: [
-            // Konum seçimi bölümü
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0), // Logo ve konum seçimi arasına boşluk ekle
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'İstanbul',
-                        style: TextStyle(
-                          fontSize: 14.0, // Daha küçük font boyutu
-                          color: Colors.green,
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        value: 'Kadıköy', // Varsayılan değer
-                        icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-                        onChanged: (String? newValue) {
-                          // Konum değişikliği işleme
-                        },
-                        items: <String>['Kadıköy', 'Beşiktaş', 'Şişli']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // Logo bölümü
             Expanded(
               child: Align(
-                alignment: Alignment.centerLeft, // Resmi sola hizalar
+                alignment: Alignment.center,
                 child: Container(
-                  margin: const EdgeInsets.only(right: 60.0), // Resmi sola kaydırmak için margin ekleyin
+                  margin: const EdgeInsets.only(left: 90.0),
                   child: Image.asset(
                     'assets/allgotur.png',
-                    height: 120.0, // Resmin boyutunu ayarlayın
-                    width: 120.0, // Genişlik ayarı
-                    fit: BoxFit.contain, // Resmin orantılı şekilde görünmesini sağlar
+                    height: 90.0,
+                    width: 90.0,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
+            ),
+            IconButton(
+              icon: Image.asset(
+                'assets/zerogoal.png',
+                width: 90.0,
+                height: 90.0,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RestReserve(),
+                  ),
+                );
+              },
             ),
           ],
         ),
-        backgroundColor: Colors.transparent, // Şeffaf arka plan
-        elevation: 0, // Gölge yok
-        actions: [
-          IconButton(
-            icon: Image.asset(
-              'assets/zerogoal.png',
-              width: 50.0, // Sepet ikonunun genişliği arttırıldı
-              height: 50.0, // Sepet ikonunun yüksekliği arttırıldı
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RestReserve(),
-                ),
-              );
-            },
-          ),
-        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Stack(
         children: [
-          // Arka plan daireleri
           Positioned(
             top: -150,
             left: -150,
@@ -117,95 +148,116 @@ class ResHomeScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              // AppBar sonrası boşluk
-              SizedBox(height: kToolbarHeight + 65), // AppBar yüksekliği + 65 piksel
-              // Banner bölümü
+              SizedBox(height: kToolbarHeight + 85),
               Container(
-                height: 200.0, // Banner yüksekliği
-                margin: const EdgeInsets.symmetric(horizontal: 10.0), // Yatay margin
+                height: 220.0,
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: [BoxShadow(color: Colors.blueGrey, blurRadius: 5)],
+                ),
+                clipBehavior: Clip.antiAlias,
                 child: PageView(
+                  controller: _controller,
                   children: [
-                    Image.asset('assets/banner1.png', fit: BoxFit.cover), // Banner resimleri
+                    Image.asset('assets/banner5.gif', fit: BoxFit.cover),
+                    Image.asset('assets/banner4.gif', fit: BoxFit.cover),
                     Image.asset('assets/banner2.png', fit: BoxFit.cover),
-                    Image.asset('assets/banner3.png', fit: BoxFit.cover),
                   ],
                 ),
               ),
-              SizedBox(height: 20.0), // Banner altındaki boşluk
-              // Ürün listesi
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    _buildProductItem(
-                      context,
-                      'assets/taking_food.png', // Ürün logosu yolu
-                      'Taking Food',
-                      'Şirket Yemek Belirtmedi',
-                      '22.00-22.30',
-                      Colors.green,
-                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2), // Ana yazı rengi
-                      () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Product(), // TakingFoodScreen'e yönlendir
-                          ),
-                        );
-                      },
-                    ),
-                    _buildProductItem(
-                      context,
-                      'assets/bonfire.png', // Ürün logosu yolu
-                      'Bonfire',
-                      'Domates Çorbası',
-                      '23.00-23.30',
-                      Colors.green,
-                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2), // Ana yazı rengi
-                      () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Product2(), // BonfireScreen'e yönlendir
-                          ),
-                        );
-                      },
-                    ),
-                    _buildProductItem(
-                      context,
-                      'assets/grill.png', // Ürün logosu yolu
-                      'Grill',
-                      'Şirket Çeşit Belirtmedi',
-                      '23.45-23.59',
-                      Colors.green,
-                      const Color.fromARGB(255, 111, 111, 111).withOpacity(0.2),// Ana yazı rengi
-                      () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Product3(), // GrillScreen'e yönlendir
-                          ),
-                        );
-                      },
-                    ),
-                    // Diğer ürünleri buraya ekleyin
-                  ],
+              SizedBox(height: 20),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 3,
+                effect: WormEffect(
+                  dotHeight: 8,
+                  dotWidth: 8,
+                  spacing: 16,
+                  activeDotColor: Colors.blue,
+                  dotColor: Colors.grey,
                 ),
+              ),
+              SizedBox(height: 90.0),
+              Expanded(
+                child: _buildProductList(), // Yemek listesini ekleme
               ),
             ],
           ),
+          Positioned(
+            bottom: 318,
+            left: 5,
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.transparent,
+                  width: 0,
+                ),
+              ),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChatBotScreen(),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/chat.gif',
+                  width: 120,
+                  height: 120,
+                ),
+                heroTag: 'chatBotScreen',
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 318, // Adjust this value based on your design
+            left: 120, // Adjust this value based on your design
+            child: AnimatedOpacity(
+              opacity: _isTextVisible ? 1.0 : 0.0,
+              duration: Duration(seconds: 30), // Animation duration
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: TypewriterAnimatedTextKit(
+                  text: [
+                    'Bana sürdürülebilir yaşam \nhedefleri hakkında soru sor...',
+                  ],
+                  textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
+                  speed: Duration(milliseconds: 100), // Yazma hızı
+                  repeatForever: true,
+                ),
+
+              ),
+
+            ),
+
+          ),
+
+
         ],
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10.0,
-        color: Color.fromARGB(255, 255, 255, 255), // Şeffaf arka plan
-        elevation: 0, // Gölge yok
+        color: Color.fromARGB(255, 255, 255, 255),
+        elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0), // Boyut arttırıldı
+              icon: Image.asset('assets/home.png', width: 90.0, height: 90.0),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -215,9 +267,9 @@ class ResHomeScreen extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(width: 90.0), // Yüzer aksiyon butonu için boşluk
+            SizedBox(width: 90.0),
             IconButton(
-              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0), // Boyut arttırıldı
+              icon: Image.asset('assets/profile.png', width: 90.0, height: 90.0),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -240,15 +292,66 @@ class ResHomeScreen extends StatelessWidget {
             ),
           );
         },
-        backgroundColor: Colors.transparent, // Şeffaf arka plan
-        elevation: 0, // Gölge yok
-        child: Image.asset('assets/plus.png', width: 130.0, height: 130.0), // Ekle butonunun boyutu arttırıldı
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        child: Image.asset('assets/plus.png', width: 130.0, height: 130.0),
       ),
     );
   }
+  Widget _buildProductList() {
+    // Boş değerler için kontrol
+    if (selectedLocation.isEmpty || userUID.isEmpty) {
+      return Center(child: Text('Lokasyon veya kullanıcı bilgisi eksik.'));
+    }
 
-  // Ürün kartı oluşturma fonksiyonu
-  Widget _buildProductItem(BuildContext context, String logoPath, String title, String subtitle, String time, Color logoBgColor, Color cardBgColor, VoidCallback onTap) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('restaurants')
+          .doc(selectedLocation)
+          .collection('details')
+          .doc(userUID)
+          .collection('yemekler')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Center(child: Text('Yemek bulunamadı.'));
+        }
+
+        return ListView(
+          padding: EdgeInsets.zero,
+          children: snapshot.data!.docs.map((doc) {
+            var data = doc.data() as Map<String, dynamic>;
+            return _buildProductItem(
+              context,
+              data['imageUrl'] ?? '',
+              data['aciklama'] ?? 'Açıklama yok',
+              data['yemekMiktari'] ?? 'Miktar yok',
+              data['yemekTuru'] ?? 'Tür yok',
+              data['ilanBasligi'] ?? 'Başlık yok',
+              '${data['yemekZamani'] ?? '0.0'}',
+              Colors.grey[200]!,
+              Colors.white,
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RestReserve(),
+                  ),
+                );
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+  Widget _buildProductItem(BuildContext context, String logoPath, String exp,
+      int quantity, String type, String baslik, String time, Color logoBgColor,
+      Color cardBgColor, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -266,28 +369,35 @@ class ResHomeScreen extends StatelessWidget {
                 color: logoBgColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Image.asset(logoPath, width: 60.0, height: 60.0), // Logonun boyutu arttırıldı
+              child: Image.network(logoPath, width: 60.0, height: 60.0, fit: BoxFit.cover),
             ),
             SizedBox(width: 10.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)), // Font boyutu arttırıldı ve kalın yapıldı
-                  Text(subtitle, style: TextStyle(fontSize: 14.0, color: Colors.grey[700])), // Font boyutu arttırıldı
+                  Text(baslik, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                  Text(type, style: TextStyle(fontSize: 14.0, color: Colors.grey[700])),
+                  Text(exp, style: TextStyle(fontSize: 14.0, color: Colors.grey[600])),
                 ],
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(time, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)), // Font boyutu arttırıldı ve kalın yapıldı
-                const Icon(Icons.access_time, size: 20.0), // İkon boyutu ayarlandı
+                Text(time, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
+                Text(quantity.toString(), style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
