@@ -1,4 +1,4 @@
-# Takım İsmi
+![image](https://github.com/user-attachments/assets/06852c80-1755-462e-8d5d-256f72288d49)# Takım İsmi
 ###### Flutter Grup 60
 
 # Takım Üyeleri
@@ -97,3 +97,31 @@ Daily scrum toplantı not örnekleri:
 ![image](https://github.com/user-attachments/assets/bcf3a2a3-1d6f-46de-a9a8-4c633d890f94)
 ![image](https://github.com/user-attachments/assets/5c2f1e02-77b3-43ad-8c0f-ca696ff3e4d3)
 ![image](https://github.com/user-attachments/assets/fd11fc93-acdd-46dc-8da5-8480129f4d04)
+
+# SPRINT 3
+
+Sprint içinde tamamlanması tahmin edilen puan: 200
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 547 puanlık backlog bulunmaktadır.
+Üçüncü sprint için 216 puanlık hedef oluşturulmuştur ve hedefe ulaşılmıştır. Toplam 547 puanlık backlog tamamlanmıştır.
+
+Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına karar verilmiştir. 
+
+Ürün Durumu:
+
+Sprint board screenshot:
+![image](https://github.com/user-attachments/assets/df8f5f15-ceba-4c94-81c0-b464673b8f48)
+
+
+Sprint Notları:
+- Sprint sorunsuz ilerlemiştir.
+- Tasarım için Figmada belirlenen tasarımlar fluttera dökülmüştür.
+- Giriş sayfalarında firebase bağlantıları yapılmıştır.
+
+Sprint Review:
+- Genel olarak sorunsuz bir sprint süreci geçirildi.
+
+Sprint Retrospective:
+
+Daily scrum toplantı not örnekleri:
+
