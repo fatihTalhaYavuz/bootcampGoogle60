@@ -111,6 +111,8 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 547 puan
 Daily Scrum: Daily scrum toplantılarının whatsapp üzerinden yapılmasına karar verilmiştir. 
 
 Ürün Durumu:
+![Ekran görüntüsü 2024-08-02 013743](https://github.com/user-attachments/assets/cbb425ae-f34b-426d-92ad-4f6a63da368d)
+
 
 Sprint board screenshot:
 ![image](https://github.com/user-attachments/assets/df8f5f15-ceba-4c94-81c0-b464673b8f48)
