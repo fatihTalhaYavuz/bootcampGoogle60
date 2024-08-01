@@ -82,12 +82,13 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 100.0,
         title: Row(
           children: [
             Expanded(
               child: Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Container(
                   margin: const EdgeInsets.only(left: 90.0),
                   child: Image.asset(
@@ -177,6 +178,10 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                   dotColor: Colors.grey,
                 ),
               ),
+              SizedBox(height: 90.0),
+              Expanded(
+                child: _buildProductList(), // Yemek listesini ekleme
+              ),
             ],
           ),
           Positioned(
@@ -233,9 +238,14 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
                   speed: Duration(milliseconds: 100), // Yazma hızı
                   repeatForever: true,
                 ),
+
               ),
+
             ),
+
           ),
+
+
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -288,8 +298,12 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
       ),
     );
   }
-
   Widget _buildProductList() {
+    // Boş değerler için kontrol
+    if (selectedLocation.isEmpty || userUID.isEmpty) {
+      return Center(child: Text('Lokasyon veya kullanıcı bilgisi eksik.'));
+    }
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('restaurants')
@@ -335,7 +349,6 @@ class _ResHomeScreenState extends State<ResHomeScreen> {
       },
     );
   }
-
   Widget _buildProductItem(BuildContext context, String logoPath, String exp,
       int quantity, String type, String baslik, String time, Color logoBgColor,
       Color cardBgColor, VoidCallback onTap) {

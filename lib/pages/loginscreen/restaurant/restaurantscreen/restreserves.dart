@@ -12,11 +12,12 @@ class RestReserve extends StatefulWidget {
 }
 
 class _RestReserveState extends State<RestReserve> {
-  bool showCart = true; // Başlangıç durumu sepeti gösterir
+  bool showCart = true;
   List<DocumentSnapshot> foods = [];
-  String selectedLocation = ''; // Kullanıcının ilçesi
-  bool isLoading = true; // Yüklenme durumunu göstermek için
-  String userUID = ''; // Kullanıcı UID'si
+  List<Map<String, dynamic>> reservations = [];
+  String selectedLocation = '';
+  bool isLoading = true;
+  String userUID = '';
 
   @override
   void initState() {
@@ -31,15 +32,11 @@ class _RestReserveState extends State<RestReserve> {
         setState(() {
           userUID = user.uid;
         });
-        print("DENEME"+ userUID);
-        await _fetchUserLocation(); // Kullanıcının lokasyonunu çek
+        await _fetchUserLocation();
       } else {
-        // Kullanıcı mevcut değilse, kullanıcıyı giriş yapmaya yönlendir
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-              builder: (context) => const AppOpenScreen() // Giriş ekranına yönlendir
-          ),
+          MaterialPageRoute(builder: (context) => const AppOpenScreen()),
         );
       }
     } catch (e) {
@@ -49,9 +46,6 @@ class _RestReserveState extends State<RestReserve> {
 
   Future<void> _fetchUserLocation() async {
     try {
-      // Tüm lokasyonları çek
-      List<String> districts = ['Adalar', 'Arnavutköy', 'Üsküdar']; // Örnek lokasyonlar
-
       for (String district in Districts.istanbulDistricts) {
         DocumentSnapshot? userDoc = await FirebaseFirestore.instance
             .collection('restaurants')
@@ -62,25 +56,21 @@ class _RestReserveState extends State<RestReserve> {
 
         if (userDoc.exists) {
           setState(() {
-            selectedLocation = district; // Kullanıcının bulunduğu lokasyonu ayarla
+            selectedLocation = district;
           });
-          break; // Kullanıcı bulundu, döngüden çık
+          break;
         }
       }
       await _fetchFoods();
+
     } catch (e) {
       print('Kullanıcının lokasyonu alınırken hata oluştu: $e');
     }
   }
 
   Future<void> _fetchFoods() async {
-    if (selectedLocation.isEmpty) return; // İlçe henüz ayarlanmamışsa veriyi çekme
+    if (selectedLocation.isEmpty) return;
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        throw Exception('Kullanıcı giriş yapmamış.');
-      }
-      final userUID = user.uid;
       final snapshot = await FirebaseFirestore.instance
           .collection('restaurants')
           .doc(selectedLocation)
@@ -91,8 +81,66 @@ class _RestReserveState extends State<RestReserve> {
       setState(() {
         foods = snapshot.docs;
       });
+      await _fetchReservations();
     } catch (e) {
       print('Veri çekme hatası: $e');
+    }
+  }
+
+  Future<void> _fetchReservations() async {
+    if (selectedLocation.isEmpty) return;
+    try {
+      final reservationsSnapshot = await FirebaseFirestore.instance
+          .collection('restaurants')
+          .doc(selectedLocation)
+          .collection('details')
+          .doc(userUID)
+          .collection('reservations')
+          .get();
+
+      List<Map<String, dynamic>> tempReservations = [];
+
+      for (var doc in reservationsSnapshot.docs) {
+        var reservationData = doc.data();
+        String foodId = reservationData['foodId'];
+        String userId = reservationData['userId'];
+
+        // Fetch food details
+        DocumentSnapshot foodSnapshot = await FirebaseFirestore.instance
+            .collection('restaurants')
+            .doc(selectedLocation)
+            .collection('details')
+            .doc(userUID)
+            .collection('yemekler')
+            .doc(foodId)
+            .get();
+
+        // Fetch user details
+        DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .get();
+
+        tempReservations.add({
+          'yemekAdet': reservationData['yemekAdet'],
+          'yemekTuru': foodSnapshot['yemekTuru'],
+          'aciklama': foodSnapshot['aciklama'],
+          'ilanBasligi': foodSnapshot['ilanBasligi'],
+          'userName': userSnapshot['name'],
+          'userPhone': userSnapshot['phone'],
+        });
+      }
+      print("DENEME:"+ tempReservations.toString());
+
+      setState(() {
+        reservations = tempReservations;
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Rezervasyon verisi çekme hatası: $e');
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -113,10 +161,9 @@ class _RestReserveState extends State<RestReserve> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body:
-      Stack(
+      body: Stack(
         children: [
-          // Üst daire
+          // Background circles (unchanged)
           Positioned(
             top: -150,
             left: -150,
@@ -129,7 +176,6 @@ class _RestReserveState extends State<RestReserve> {
               ),
             ),
           ),
-          // Alt daire
           Positioned(
             bottom: -180,
             right: -150,
@@ -191,18 +237,18 @@ class _RestReserveState extends State<RestReserve> {
                   ),
                 ),
                 Expanded(
-                  child: showCart ? buildCartContent() : buildReservationsContent(), // İçeriği göster
+                  child: showCart ? buildCartContent() : buildReservationsContent(),
                 ),
               ],
             ),
           ),
-
         ],
       ),
     );
   }
 
   Widget buildCartContent() {
+    // Unchanged
     return foods.isEmpty
         ? Center(child: Text('Sepetiniz boş.'))
         : ListView.builder(
@@ -223,11 +269,22 @@ class _RestReserveState extends State<RestReserve> {
   }
 
   Widget buildReservationsContent() {
-    // Örnek rezervasyon içeriği
-    return Center(child: Text('Rezervasyonlarınız buraya gelecek.'));
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return reservations.isEmpty
+        ? Center(child: Text('Rezervasyon bulunmamaktadır.'))
+        : ListView.builder(
+      itemCount: reservations.length,
+      itemBuilder: (context, index) {
+        var reservation = reservations[index];
+        return ReservationCard(reservation: reservation);
+      },
+    );
   }
 
   void _updateFoodQuantity(String docId, int newQuantity) {
+    // Unchanged
     FirebaseFirestore.instance
         .collection('restaurants')
         .doc(selectedLocation)
@@ -239,6 +296,7 @@ class _RestReserveState extends State<RestReserve> {
   }
 
   void _deleteFood(String docId) {
+    // Unchanged
     FirebaseFirestore.instance
         .collection('restaurants')
         .doc(selectedLocation)
@@ -260,6 +318,7 @@ class _RestReserveState extends State<RestReserve> {
 }
 
 class FoodCard extends StatelessWidget {
+  // Unchanged
   final DocumentSnapshot food;
   final Function(int) onQuantityChanged;
   final VoidCallback onDelete;
@@ -305,11 +364,11 @@ class FoodCard extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Miktar',
                   ),
-                  keyboardType: TextInputType.number, // Sayısal giriş için klavye tipi
+                  keyboardType: TextInputType.number,
                   onSubmitted: (value) {
-                    int? newQuantity = int.tryParse(value); // Girdiyi int'e çevir
+                    int? newQuantity = int.tryParse(value);
                     if (newQuantity != null) {
-                      onQuantityChanged(newQuantity); // Girdi geçerliyse int olarak işle
+                      onQuantityChanged(newQuantity);
                     }
                   },
                 ),
@@ -323,6 +382,37 @@ class FoodCard extends StatelessWidget {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReservationCard extends StatelessWidget {
+  final Map<String, dynamic> reservation;
+
+  const ReservationCard({required this.reservation, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(reservation['ilanBasligi'], style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+          Text('Yemek Türü: ${reservation['yemekTuru']}', style: TextStyle(fontSize: 16.0)),
+          Text('Açıklama: ${reservation['aciklama']}', style: TextStyle(fontSize: 14.0)),
+          Text('Adet: ${reservation['yemekAdet']}', style: TextStyle(fontSize: 14.0)),
+          Divider(),
+          Text('Rezerve Eden: ${reservation['userName']}', style: TextStyle(fontSize: 14.0)),
+          Text('Telefon: ${reservation['userPhone']}', style: TextStyle(fontSize: 14.0)),
         ],
       ),
     );

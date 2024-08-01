@@ -153,19 +153,7 @@ class _AppOpenScreenState extends State<AppOpenScreen> {
                   child: const Icon(Icons.person),
                   heroTag: 'userHomeScreen',
                 ),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ResHomeScreen(),
-                      ),
-                    );
-                  },
-                  child: const Icon(Icons.restaurant),
-                  heroTag: 'resHomeScreen',
-                ),
+
               ],
             ),
           ),

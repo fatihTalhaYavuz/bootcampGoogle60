@@ -73,24 +73,6 @@ class _ResProfileState extends State<ResProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 100.0, // AppBar yüksekliği
-        backgroundColor: Colors.transparent, // Şeffaf arka plan
-        elevation: 0, // Gölge yok
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Geri ok ikonu
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Align(
-          alignment: Alignment(-0.2, 0), // Hafif sola hizalanmış
-          child: Image.asset(
-            'assets/allgotur.png',
-            height: 80.0, // Logo boyutu
-          ),
-        ),
-      ),
       body: Stack(
         children: [
           // Üstteki daire

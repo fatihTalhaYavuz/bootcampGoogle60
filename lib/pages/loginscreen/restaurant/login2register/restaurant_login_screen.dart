@@ -30,6 +30,7 @@ class _RestaurantLoginScreenState extends State<RestaurantLoginScreen> {
 
       if (user != null) {
         bool restaurantExists = await _checkIfRestaurantExists(user.uid);
+
         if (restaurantExists) {
           Navigator.pushReplacement(
             context,

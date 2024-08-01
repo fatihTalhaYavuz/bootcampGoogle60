@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:google_bootcamp_60/app_open_screen.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product2.dart';
 import 'package:google_bootcamp_60/pages/loginscreen/user/userscreen/details/product3.dart';
@@ -164,9 +165,51 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         );
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Lütfen giriş yapın')),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white, // Arka plan rengini açık yeşil yap
+            title: Text('Giriş Yapılmadı', style: TextStyle(color: Colors.black)),
+            content: Text('Lütfen giriş yapın', style: TextStyle(color: Colors.black)),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.orange, // Buton rengi turuncu
+                ),
+                child: Text(
+                  'Giriş Yap',
+                  style: TextStyle(color: Colors.white), // Yazı rengini beyaz yap
+                ),
+                onPressed: () {
+                  // Giriş ekranına yönlendirme kodu
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AppOpenScreen(), // Giriş ekranına yönlendir
+                    ),
+                  );
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.orange, // Buton rengi turuncu
+                ),
+                child: Text(
+                  'Kapat',
+                  style: TextStyle(color: Colors.white), // Yazı rengini beyaz yap
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Pop-up'ı kapat
+                },
+              ),
+            ],
+          );
+        },
       );
+
+
+
     }
   }
 
@@ -446,7 +489,14 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       VoidCallback onTap,
       ) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Product(),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         padding: const EdgeInsets.all(8.0),
