@@ -148,6 +148,10 @@ Erişim süreci, kullanıcıların saygın bir şekilde gıdaya ulaşmasını sa
 - Sosyal medyada paylaşılabilir içerik
 - Arkadaş çevresiyle birlikte hareket etme fırsatları
 
+## Jüriye Not
+- AllGötür uygulaması şu anda sadece İstanbul'da kullanılmaktadır. Geliştirme süreci tamamlandıktan sonra, diğer şehirlerde de kullanıma açılması planlanmaktadır.
+
+- Uygulamaya giriş yaptıktan sonra, sağ alttaki butondan kullanıcı sistemi kontrol edilebilir. Bu, giriş yapmadan herhangi bir işlem yapılamayacağı ama uygulamayı inceleyebileceği anlamına gelir.
 
 # SPRINT 1
 
