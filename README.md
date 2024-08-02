@@ -256,3 +256,10 @@ Sprint Retrospective:
 Daily scrum toplantı not örnekleri:
 https://drive.google.com/drive/folders/1UNGY-JLfRJzuxmqFFnyd45QaJGJKkAmn?usp=sharing
 
+Kullanılan Teknolojiler
+- Kullanıcı doğrulaması için Firebase authentication kullanıldı
+- Database için Firestore database kullanıldı
+- Uygulama ekran tasarımları için Figma kullanıldı
+- Iconlar ve görüntüler için png wing kullanıldı
+- Yapay zeka chatbot için Gemini API kullanıldı
+- Video hazırlanması ve tasarım içi canva kullanıldı
