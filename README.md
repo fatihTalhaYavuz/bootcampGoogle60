@@ -22,15 +22,102 @@ Bu uygulama, restoranları ihtiyaç sahipleriyle buluşturarak yemek israfını 
 Restoranların gün sonundaki yemek stoklarına göre yaptıkları bağışların ihtiyaç sahiplerine ulaşmasını hedeflenmektedir.
 
 # Ürün Özellikleri
--Yemek Bağışı: Restoranlar, gün sonundaki yemek stoklarına göre AllGötür üzerinden yemek bağışında bulunabilirler.
 
--Rezervasyon İmkanı: Şu anda yalnızca İstanbul’da yaşayan kullanıcılar, kendilerine en yakın restoranlardan rezervasyon yaparak ücretsiz olarak bağışlanan yemeklere ulaşabilirler.
+**Yemek Bağışı:**
 
--Kolay Erişim: İhtiyaç sahipleri, uygulama üzerinden kolayca restoranları ve mevcut yemekleri görüntüleyebilir ve rezervasyon yapabilirler.
+Restoranlar, gün sonundaki yemek stoklarına göre AllGötür üzerinden bağış yapabilirler.
+Bağışlanan yemekler, uygulama aracılığıyla ihtiyaç sahiplerine ulaştırılır.
+
+**Rezervasyon İmkanı:**
+
+İstanbul'daki kullanıcılar, kendilerine en yakın restoranlardan rezervasyon yaparak bağışlanan yemeklere erişebilirler.
+Rezervasyonlar, restoranın mevcut yemeklerine ve kullanıcı ihtiyaçlarına göre yapılır.
+
+
+**Kolay Erişim:**
+
+İhtiyaç sahipleri, uygulama üzerinden restoranları ve mevcut yemekleri kolayca görüntüleyebilirler.
+Kullanıcılar, restoranları ve yemekleri filtreleyerek uygun seçeneklerden rezervasyon yapabilirler.
+
+
+**Kullanıcı Doğrulaması ve Yönetimi:**
+
+Firebase authentication kullanılarak kullanıcıların güvenli bir şekilde giriş yapmaları sağlanır.
+Kullanıcılar, profil bilgilerini yönetebilir ve uygulama içindeki işlemleri gerçekleştirebilirler.
+
+
+**Restoran Yönetimi:**
+
+Restoranlar, profil bilgilerini güncelleyebilir ve bağışlanan yemeklerin yönetimini yapabilirler.
+Restoranların yemekleri ilçe bazında listelenir ve kullanıcılar rezervasyon yapabilirler.
+
+
+**Sürdürülebilir Kalkınma Amaçları Bilgilendirmesi:**
+
+Gemini API entegrasyonu ile kullanıcılar, Sürdürülebilir Kalkınma Amaçları hakkında bilgi alabilirler.
+Chatbot özelliği sayesinde kullanıcılar, bu konuda sorular sorabilirler.
+
+
+**Rezerve İşlemleri:**
+
+Kullanıcıların restoranlar ile rezervasyon işlemleri Firestore üzerinden yapılır.
+Rezervasyon işlemleri, kullanıcının seçimine ve restoranın mevcut yemek durumuna göre düzenlenir.
+
+
+**İhtiyaç Sahipleri için Gıda Erişimi:**
+
+İhtiyaç sahipleri, uygulama aracılığıyla düzenli ve güvenilir bir gıda kaynağına erişebilirler.
+Erişim süreci, kullanıcıların saygın bir şekilde gıdaya ulaşmasını sağlar.
 
 # Hedef Kitle
-- Eşit yaşam şartları için ücretsiz olarak yemeğe ihtiyacı olan kişiler.
-- Sürdürülebilir bir yaşam için açlığa son vermeye katkıda bulunmak isteyen restoranlar.
+#### 1. Restoran Sahipleri ve İşletmecileri
+**Neden?:** Uygulamanın en önemli paydaşları olan restoran sahipleri ve işletmecileri, hem sosyal sorumluluklarını yerine getirmek hem de israfı azaltmak için uygulamayı kullanabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Gıda israfını azaltmak
+- Sosyal sorumluluk projelerine katılım
+- Marka değerini artırmak
+- Fazla yemeklerin değerlendirilmesi
+
+#### 2. İhtiyaç Sahipleri
+**Neden?:** Gıdaya erişimi sınırlı olan bireyler ve aileler, restoranların bağışladığı yemekler sayesinde günlük ihtiyaçlarını karşılayabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Düzenli ve güvenilir gıda kaynağı
+- Erişilebilir ve kolay kullanım
+- Saygın bir şekilde gıdaya ulaşım
+
+#### 3. Sosyal Sorumluluk ve Gönüllülük Faaliyetlerine Katılmak İsteyen Bireyler
+**Neden?:** Topluma fayda sağlamak isteyen bireyler, uygulama aracılığıyla restoranlardan yemek alarak ihtiyaç sahiplerine ulaştırabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Sosyal sorumluluk projelerine katılım
+- Gönüllülük fırsatları
+- Topluma doğrudan katkı sağlama imkanı
+
+#### 4. Çevre ve Sürdürülebilirlik Konularına Duyarlı Bireyler
+**Neden?:** Çevreye duyarlı bireyler, gıda israfını azaltarak sürdürülebilirlik hedeflerine katkıda bulunmak için uygulamayı kullanabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Çevresel etkilerini azaltma
+- Sürdürülebilir yaşam tarzını destekleme
+- Gıda israfını önleme
+
+#### 5. Yardım Kuruluşları ve STK'lar
+**Neden?:** İhtiyaç sahiplerine yardım etmek isteyen yardım kuruluşları ve sivil toplum kuruluşları, uygulama aracılığıyla daha fazla kişiye ulaşabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Geniş kitlelere ulaşma
+- Daha fazla insanın ihtiyaçlarını karşılayabilme
+- İşbirliği ve bağış toplama fırsatları
+
+#### 6. Genç ve Teknolojiye Yatkın Kullanıcılar
+**Neden?:** Mobil uygulamalara ve dijital çözümlere aşina olan genç kullanıcılar, sosyal sorumluluk projelerine katılmak ve uygulamanın yaygınlaşmasına katkıda bulunmak için ideal bir kitle olabilirler.
+
+**İhtiyaçlar ve Beklentiler:**
+- Dijital platformlara kolay adaptasyon
+- Sosyal medyada paylaşılabilir içerik
+- Arkadaş çevresiyle birlikte hareket etme fırsatları
 
 
 # SPRINT 1
