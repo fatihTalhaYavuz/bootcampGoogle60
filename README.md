@@ -5,10 +5,39 @@
 ###### Flutter Grup 60
 
 # Takım Üyeleri
-###### İnci Temizel - Scrum Master - Developer
-###### Fatih Talha Yavuzoğlu - Product Owner - Developer
-###### İpek Gültekin - Developer
-###### Ferat Taş - Developer
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>GitHub</th>
+        <th>LinkedIn</th>
+    </tr>
+    <tr>
+        <td>İnci Temizel</td>
+        <td>Scrum Master - Developer</td>
+        <td><a href="https://github.com/incitemizel" target="_blank">GitHub Profile</a></td>
+        <td><a href="https://www.linkedin.com/in/inci-temizel-150875188/" target="_blank">LinkedIn Profile</a></td>
+    </tr>
+    <tr>
+        <td>Fatih Talha YavuzAslanoğlu</td>
+        <td>Product Owner - Developer</td>
+        <td><a href="https://github.com/fatihTalhaYavuz" target="_blank">GitHub Profile</a></td>
+        <td><a href="https://www.linkedin.com/in/fatih-talha-y-b48a7182/" target="_blank">LinkedIn Profile</a></td>
+    </tr>
+    <tr>
+        <td>İpek Gültekin</td>
+        <td>Developer</td>
+        <td><a href="https://github.com/ipekgultekin" target="_blank">GitHub Profile</a></td>
+        <td><a href="https://www.linkedin.com/in/ipekgultekinn/" target="_blank">LinkedIn Profile</a></td>
+    </tr>
+    <tr>
+        <td>Ferat Taş</td>
+        <td>Developer</td>
+        <td><a href="https://www.linkedin.com/in/ferattass/" target="_blank">GitHub Profile</a></td>
+        <td><a href="https://github.com/ferattass" target="_blank">LinkedIn Profile</a></td>
+    </tr>
+</table>
 
 # Ürün İsmi
 ###### AllGötür
