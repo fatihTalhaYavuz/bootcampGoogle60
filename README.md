@@ -256,6 +256,18 @@ Sprint Retrospective:
 Daily scrum toplantı not örnekleri:
 https://drive.google.com/drive/folders/1UNGY-JLfRJzuxmqFFnyd45QaJGJKkAmn?usp=sharing
 
+# Color Reference
+  **`(color palette changed at second sprint)`**
+
+  | Color             | Hex                                                                |
+  | ----------------- | ------------------------------------------------------------------ |
+  | Primary Color | ![#EDFED2](https://via.placeholder.com/10/EDFED2?text=+) #EDFED2 |
+  | Light Greem Color | ![#7DD15F](https://via.placeholder.com/10/7DD15F?text=+) #7DD15F |
+  | Button Color | ![#C8C4B7](https://via.placeholder.com/10/C8C4B7?text=+) #C8C4B7 |
+  | Dark Color | ![#12162D](https://via.placeholder.com/10/12162D?text=+) #12162D |
+  | Button1 Color | ![#DEA73A](https://via.placeholder.com/10/DEA73A?text=+) #DEA73A |
+  | Button2 Color | ![#9AD8AD](https://via.placeholder.com/10/B9CCBF?text=+) #B9CCBF |
+
 Kullanılan Teknolojiler
 - Kullanıcı doğrulaması için Firebase authentication kullanıldı
 - Database için Firestore database kullanıldı
